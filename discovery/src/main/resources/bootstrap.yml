@@ -2,6 +2,6 @@ spring:
   cloud:
     config:
       name: discovery
-      uri: http://localhost:8888
+      uri: http://config-server:8888
       username: configUser
       password: configPassword

@@ -1,5 +1,4 @@
-rootProject.name = 'YourMarketplace'
-include 'img-service'
+rootProject.name = 'ProjectTemplate'
 include 'config'
 include 'discovery'
 include 'gateway'

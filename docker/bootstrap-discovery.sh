@@ -1,6 +1,6 @@
 #!/bin/bash
 
-while ! nc -z localhost 8888; do
+while ! nc -z config-server 8888; do
     echo "Waiting for the Config Server"
     sleep 3
 done

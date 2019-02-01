@@ -1,6 +1,10 @@
 version: '3.7'
 
+networks:
+  mp-network:
+
 services:
+
   my-sql:
     container_name: mysql-server
     build:
@@ -15,7 +19,8 @@ services:
       - 3306
     ports:
       - 3306:3306
-    network_mode: host
+    networks:
+      - mp-network
 
   config-server:
     container_name: config-server
@@ -27,7 +32,8 @@ services:
       - 8888
     ports:
       - 8888:8888
-    network_mode: host
+    networks:
+      - mp-network
 
   discovery-server:
     container_name: discovery-server
@@ -39,7 +45,8 @@ services:
       - 8761
     ports:
       - 8761:8761
-    network_mode: host
+    networks:
+      - mp-network
     depends_on:
       - config-server
 
@@ -53,22 +60,8 @@ services:
       - 8100
     ports:
       - 8100:8100
-    network_mode: host
-    depends_on:
-      - config-server
-      - discovery-server
-
-  image-server:
-    container_name: image-server
-    build:
-      context: .
-      dockerfile: Dockerfile-image-server
-    image: image-server:latest
-    expose:
-      - 8400
-    ports:
-      - 8400:8400
-    network_mode: host
+    networks:
+      - mp-network
     depends_on:
       - config-server
       - discovery-server
@@ -83,7 +76,8 @@ services:
       - 8200
     ports:
       - 8200:8200
-    network_mode: host
+    networks:
+      - mp-network
     depends_on:
       - config-server
       - discovery-server
