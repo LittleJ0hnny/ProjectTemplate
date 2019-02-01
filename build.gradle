@@ -1,0 +1,51 @@
+buildscript {
+    ext {
+        springBootVersion = '2.0.6.RELEASE'
+        mysql_connector_version = '8.0.13'
+        liquibase_version = '3.6.2'
+    }
+    repositories {
+        mavenCentral()
+    }
+    dependencies {
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+    }
+}
+
+group 'com.littlejohnny'
+version '1.0-SNAPSHOT'
+
+subprojects {
+    apply plugin: 'idea'
+    apply plugin: 'java'
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+
+    sourceCompatibility = 1.8
+
+    repositories {
+        mavenCentral()
+    }
+
+    ext {
+        springCloudVersion = 'Finchley.SR1'
+    }
+
+    dependencyManagement {
+        imports {
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+        }
+    }
+
+    dependencies {
+        implementation('org.springframework.boot:spring-boot-starter')
+        implementation('javax.xml.bind:jaxb-api:2.3.0')
+        testImplementation('org.springframework.boot:spring-boot-starter-test')
+        compileOnly('org.projectlombok:lombok:1.18.4')
+    }
+}
+
+task wrapper(type: Wrapper) {
+    gradleVersion = '4.10.2'
+}
+

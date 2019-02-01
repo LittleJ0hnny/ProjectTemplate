@@ -1,0 +1,90 @@
+version: '3.7'
+
+services:
+  my-sql:
+    container_name: mysql-server
+    build:
+      context: .
+      dockerfile: Dockerfile-mysql-server
+    image: mysql-server:latest
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+    volumes:
+      - ./docker/mysql:/var/lib/mysql
+    expose:
+      - 3306
+    ports:
+      - 3306:3306
+    network_mode: host
+
+  config-server:
+    container_name: config-server
+    build:
+      context: .
+      dockerfile: Dockerfile-config-server
+    image: config-server:latest
+    expose:
+      - 8888
+    ports:
+      - 8888:8888
+    network_mode: host
+
+  discovery-server:
+    container_name: discovery-server
+    build:
+      context: .
+      dockerfile: Dockerfile-discovery-server
+    image: discovery-server:latest
+    expose:
+      - 8761
+    ports:
+      - 8761:8761
+    network_mode: host
+    depends_on:
+      - config-server
+
+  gateway:
+    container_name: gateway-server
+    build:
+      context: .
+      dockerfile: Dockerfile-gateway-server
+    image: gateway-server:latest
+    expose:
+      - 8100
+    ports:
+      - 8100:8100
+    network_mode: host
+    depends_on:
+      - config-server
+      - discovery-server
+
+  image-server:
+    container_name: image-server
+    build:
+      context: .
+      dockerfile: Dockerfile-image-server
+    image: image-server:latest
+    expose:
+      - 8400
+    ports:
+      - 8400:8400
+    network_mode: host
+    depends_on:
+      - config-server
+      - discovery-server
+
+  auth-server:
+    container_name: auth-server
+    build:
+      context: .
+      dockerfile: Dockerfile-auth-server
+    image: auth-server:latest
+    expose:
+      - 8200
+    ports:
+      - 8200:8200
+    network_mode: host
+    depends_on:
+      - config-server
+      - discovery-server
+      - my-sql

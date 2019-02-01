@@ -1,0 +1,19 @@
+/* You can add global styles to this file, and also import other style files */
+@import '~@angular/material/prebuilt-themes/deeppurple-amber.css';
+@import url("https://fonts.googleapis.com/icon?family=Material+Icons");
+
+.material-icons.md-48 { font-size: 48px; }
+
+body {
+  margin: 0;
+}
+
+.container {
+  display: flex;
+}
+
+.in-column {
+  flex-direction: column;
+}
+
+
