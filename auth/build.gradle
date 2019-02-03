@@ -16,6 +16,7 @@ dependencies {
     implementation("org.springframework.cloud:spring-cloud-starter-oauth2")
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("mysql:mysql-connector-java:${mysql_connector_version}")
+    implementation("org.liquibase:liquibase-core:${liquibase_version}")
 
     liquibase ("org.liquibase:liquibase-core:${liquibase_version}")
     liquibase ("mysql:mysql-connector-java:${mysql_connector_version}")
@@ -26,9 +27,9 @@ task generateBackup(type: JavaExec) {
     classpath configurations.liquibase
     main = "liquibase.integration.commandline.Main"
     args "--changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml"
-    args "--username=root"
-    args "--password=root"
-    args "--url=jdbc:mysql://localhost:3306/cred_db"
+    args "--username=admin"
+    args "--password=admin"
+    args "--url=jdbc:mysql://localhost:3306/cred_db?serverTimezone=UTC"
     args "--logLevel=debug"
     args "--driver=com.mysql.jdbc.Driver"
     args "--diffTypes=\"tables\", \"columns\", \"views\", \"primaryKeys\", \"indexes\", \"foreignKeys\", \"sequences\", \"data\""
@@ -40,9 +41,9 @@ task updateDb(type: JavaExec) {
     classpath configurations.liquibase
     main = "liquibase.integration.commandline.Main"
     args "--changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml"
-    args "--username=root"
-    args "--password=root"
-    args "--url=jdbc:mysql://localhost:3306/cred_db?createDatabaseIfNotExist=true"
+    args "--username=admin"
+    args "--password=admin"
+    args "--url=jdbc:mysql://localhost:3306/cred_db?createDatabaseIfNotExist=true&serverTimezone=UTC"
     args "--driver=com.mysql.jdbc.Driver"
     args "--logLevel=debug"
     args "--defaultSchemaName=cred_db"

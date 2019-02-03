@@ -5,9 +5,10 @@
 4.Add collection of image paths to product entity.
 5.Add logger.
 6.Think about ports (replication)
-7.jar names (create volumes)
+7.Expose only gateway
 8.fix gateway start problem (add timeout or ping gateway endpoint)
 9.Configure line endings on git
+10.Bind services to exact ip. Configure network
 
 for dev dependencies npm install --save-dev @angular-devkit/build-angular
 

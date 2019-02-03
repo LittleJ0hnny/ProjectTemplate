@@ -13,8 +13,6 @@ services:
     image: mysql-server:latest
     environment:
       MYSQL_ROOT_PASSWORD: root
-    volumes:
-      - ./docker/mysql:/var/lib/mysql
     expose:
       - 3306
     ports:
