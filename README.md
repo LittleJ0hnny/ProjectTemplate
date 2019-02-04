@@ -13,3 +13,18 @@
 for dev dependencies npm install --save-dev @angular-devkit/build-angular
 
 SET @@global.time_zone='+00:00'
+
+Basic Auth
+
+rootClient
+rootPassword
+
+Headers
+
+"Content-Type" "application/x-www-form-urlencoded"
+
+body {
+grant_type password
+user rootUser
+password rootUserPassword
+}
