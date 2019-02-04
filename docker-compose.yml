@@ -13,6 +13,7 @@ services:
     image: mysql-server:latest
     environment:
       - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=cred_db
       - MYSQL_USER=admin
       - MYSQL_PASSWORD=admin
     expose:
