@@ -1,7 +1,1 @@
 FROM mysql/mysql-server:8.0.13
-
-COPY docker/bootstrap-mysql.sh bootstrap-mysql.sh
-
-CMD ["bash", "entrypoint.sh"]
-
-CMD ["bash", "bootstrap-mysql.sh"]
