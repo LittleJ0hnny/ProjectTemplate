@@ -12,4 +12,4 @@ done
 
 sleep 30
 
-java -jar auth-1.0-SNAPSHOT.jar
+java $JAVA_OPTS -jar $ARTIFACT_FILE

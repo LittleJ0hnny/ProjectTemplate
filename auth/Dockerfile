@@ -1,14 +1,23 @@
 FROM openjdk:8u181-jdk
 
-EXPOSE 8200
+MAINTAINER Ostap Kravtsiv
 
 RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install netcat
 
-COPY build/libs/auth-1.0-SNAPSHOT.jar auth-1.0-SNAPSHOT.jar
-COPY bootstrap-auth.sh bootstrap-auth.sh
+EXPOSE 8200
 
-RUN chown 755 bootstrap-auth.sh
+ARG ARTIFACT=${jarName:-auth}-${jarVersion:-1.0-SNAPSHOT}.jar
+ARG BOOTSTRAP_FILE=${bootstrapFile:-bootstrap.sh}
 
-CMD ["bash", "bootstrap-auth.sh"]
+ADD build/libs/$ARTIFACT $ARTIFACT
+ADD $BOOTSTRAP_FILE $BOOTSTRAP_FILE
+
+ENV JAVA_OPTS=""
+ENV ARTIFACT_FILE=$ARTIFACT
+ENV BOOTSTRAP_FILE=$BOOTSTRAP_FILE
+
+RUN chown 755 $BOOTSTRAP_FILE
+
+ENTRYPOINT bash "$BOOTSTRAP_FILE"

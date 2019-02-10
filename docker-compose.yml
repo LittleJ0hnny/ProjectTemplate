@@ -5,7 +5,7 @@ networks:
 
 services:
 
-  my-sql:
+  mysql:
     container_name: mysql-server
     image: mysql/mysql-server:8.0.13
     environment:
@@ -26,6 +26,9 @@ services:
       context: ./config
       dockerfile: Dockerfile
     image: config-server:latest
+    environment:
+      - DISCOVERY_HOST=discovery-server
+      - DISCOVERY_PORT=8761
     expose:
       - 8888
     networks:
@@ -38,7 +41,14 @@ services:
     build:
       context: ./discovery
       dockerfile: Dockerfile
+      args:
+        jarName: discovery
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
     image: discovery-server:latest
+    environment:
+      - CONFIG_HOST=config-server
+      - CONFIG_PORT=8888
     expose:
       - 8761
     networks:
@@ -54,6 +64,11 @@ services:
       context: ./gateway
       dockerfile: Dockerfile
     image: gateway-server:latest
+    environment:
+    - DISCOVERY_HOST=discovery-server
+    - DISCOVERY_PORT=8761
+    - AUTH_HOST=auth-server
+    - AUTH_PORT=8200
     expose:
       - 8100
     ports:
@@ -74,7 +89,16 @@ services:
     build:
       context: ./auth
       dockerfile: Dockerfile
+      args:
+        jarName: auth
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
     image: auth-server:latest
+    environment:
+      - DISCOVERY_HOST=discovery-server
+      - DISCOVERY_PORT=8761
+      - MYSQL_HOST=mysql-server
+      - MYSQL_PORT=3306
     expose:
       - 8200
     networks:
@@ -84,4 +108,4 @@ services:
     depends_on:
       - config-server
       - discovery-server
-      - my-sql
+      - mysql

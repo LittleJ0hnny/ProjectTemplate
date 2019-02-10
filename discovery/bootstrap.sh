@@ -5,4 +5,4 @@ while ! nc -z config-server 8888; do
     sleep 3
 done
 
-java -jar discovery-1.0-SNAPSHOT.jar
+java $JAVA_OPTS -jar $ARTIFACT_FILE

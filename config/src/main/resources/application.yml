@@ -20,7 +20,7 @@ eureka:
     region: default
     registryFetchIntervalSeconds: 5
     serviceUrl:
-      defaultZone: http://discUser:discPassword@discovery-server:8761/eureka/
+      defaultZone: http://discUser:discPassword@${DISCOVERY_HOST:localhost}:${DISCOVERY_PORT:8761}/eureka/
 
 management:
   endpoints:
