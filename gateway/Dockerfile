@@ -8,7 +8,7 @@ RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install netcat
 
-ARG ARTIFACT=${jarName:-auth}-${jarVersion:-1.0-SNAPSHOT}.jar
+ARG ARTIFACT=${jarName:-gateway}-${jarVersion:-1.0-SNAPSHOT}.jar
 ARG BOOTSTRAP_FILE=${bootstrapFile:-bootstrap.sh}
 
 ADD build/libs/$ARTIFACT $ARTIFACT

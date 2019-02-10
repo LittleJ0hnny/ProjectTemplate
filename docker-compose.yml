@@ -25,6 +25,10 @@ services:
     build:
       context: ./config
       dockerfile: Dockerfile
+      args:
+        jarName: config
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
     image: config-server:latest
     environment:
       - DISCOVERY_HOST=discovery-server
@@ -63,6 +67,10 @@ services:
     build:
       context: ./gateway
       dockerfile: Dockerfile
+      args:
+        jarName: gateway
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
     image: gateway-server:latest
     environment:
     - DISCOVERY_HOST=discovery-server

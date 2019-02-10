@@ -4,7 +4,7 @@ MAINTAINER Ostap Kravtsiv
 
 EXPOSE 8888
 
-ARG ARTIFACT=${jarName:-auth}-${jarVersion:-1.0-SNAPSHOT}.jar
+ARG ARTIFACT=${jarName:-config}-${jarVersion:-1.0-SNAPSHOT}.jar
 
 ADD build/libs/$ARTIFACT $ARTIFACT
 
