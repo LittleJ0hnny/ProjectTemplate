@@ -6,8 +6,8 @@ RUN apt-get update
 RUN apt-get -y upgrade
 RUN apt-get -y install netcat
 
-COPY auth/build/libs/auth-1.0-SNAPSHOT.jar auth-1.0-SNAPSHOT.jar
-COPY docker/bootstrap-auth.sh bootstrap-auth.sh
+COPY build/libs/auth-1.0-SNAPSHOT.jar auth-1.0-SNAPSHOT.jar
+COPY bootstrap-auth.sh bootstrap-auth.sh
 
 RUN chown 755 bootstrap-auth.sh
 

@@ -9,6 +9,7 @@
 8.fix gateway start problem (add timeout or ping gateway endpoint)
 9.Configure line endings on git
 10.Bind services to exact ip. Configure network
+11.Read about swarm
 
 for dev dependencies npm install --save-dev @angular-devkit/build-angular
 

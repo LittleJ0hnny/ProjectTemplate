@@ -20,7 +20,7 @@ public class GatewaySecurityConfig extends ResourceServerConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/authservice/oauth/token", "/eureka/**", "/authservice/user/**", "/authservice/oauth2client/**")
+                .antMatchers("/eureka/**", "/discovery", "/authservice/oauth/token", "/authservice/oauth2client/save", "/authservice/user/save")
                 .permitAll()
                 .anyRequest()
                 .authenticated();
