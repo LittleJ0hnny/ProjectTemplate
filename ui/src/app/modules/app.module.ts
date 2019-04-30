@@ -13,6 +13,7 @@ import {RegistrationComponent} from '../components/registration/registration.com
 import {AuthService} from "../services/auth/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {SlideshowModule} from "ng-simple-slideshow";
+import {CarouselModule} from "angular2-carousel";
 
 @NgModule({
   declarations: [
@@ -30,7 +31,8 @@ import {SlideshowModule} from "ng-simple-slideshow";
     FormsModule,
     ReactiveFormsModule,
     HttpClientModule,
-    SlideshowModule
+    SlideshowModule,
+    CarouselModule
   ],
   providers: [
     AuthService

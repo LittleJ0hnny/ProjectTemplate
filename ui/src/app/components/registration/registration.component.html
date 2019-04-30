@@ -1,3 +1,85 @@
-<p>
-  registration works!
-</p>
+<div>
+  <h1 mat-dialog-title style="text-align: center;">Реєстрація</h1>
+
+  <div class="container in-line">
+    <div mat-dialog-content>
+      <form [formGroup]="registrationForm" (ngSubmit)="register()">
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Електронна адреса" formControlName="email">
+            <mat-error *ngIf="emailControl.hasError('email') && !emailControl.hasError('required')">
+              Електронна адреса не валідна
+            </mat-error>
+            <mat-error *ngIf="emailControl.hasError('required')">
+              Дане поле є <strong>обов'язковим</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Ім'я" formControlName="firstname">
+            <mat-error *ngIf="firstnameControl.hasError('maxlength') && !emailControl.hasError('required')">
+              Перевищено допустиму кількість символів
+            </mat-error>
+            <mat-error *ngIf="firstnameControl.hasError('required')">
+              Дане поле є <strong>обов'язковим</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Прізвище" formControlName="lastname">
+          </mat-form-field>
+          <mat-error *ngIf="lastnameControl.hasError('maxlength') && !emailControl.hasError('required')">
+            Перевищено допустиму кількість символів
+          </mat-error>
+          <mat-error *ngIf="lastnameControl.hasError('required')">
+            Дане поле є <strong>обов'язковим</strong>
+          </mat-error>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Пароль" formControlName="password"
+                   [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error *ngIf="passwordControl.hasError('minlength') && !passwordControl.hasError('required')">
+              Пароль повинен містити як мінімум 6 символів
+            </mat-error>
+            <mat-error *ngIf="passwordControl.hasError('maxlength') && !passwordControl.hasError('required')">
+              Максимальна довжина паролю 16 символів
+            </mat-error>
+            <mat-error *ngIf="passwordControl.hasError('required')">
+              Дане поле є <strong>обов'язковим</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div>
+          <mat-form-field>
+            <input matInput placeholder="Введіть пароль ще раз" formControlName="confirmPassword"
+                   [type]="hide ? 'password' : 'text'">
+            <mat-icon matSuffix>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+            <mat-error
+              *ngIf="confirmPasswordControl.hasError('MatchPassword') && !confirmPasswordControl.hasError('required')">
+              Паролі не співпадають
+            </mat-error>
+            <mat-error
+              *ngIf="confirmPasswordControl.hasError('minlength') && !confirmPasswordControl.hasError('required')">
+              Пароль повинен містити як мінімум 6 символів
+            </mat-error>
+            <mat-error
+              *ngIf="confirmPasswordControl.hasError('maxlength') && !confirmPasswordControl.hasError('required')">
+              Максимальна довжина паролю 16 символів
+            </mat-error>
+            <mat-error *ngIf="confirmPasswordControl.hasError('required')">
+              Дане поле є <strong>обов'язковим</strong>
+            </mat-error>
+          </mat-form-field>
+        </div>
+        <div mat-dialog-actions style="margin-bottom: 0;">
+          <button mat-button (click)="onCancelClick()">Скасувати</button>
+          <button mat-button [disabled]="!registrationForm.valid">Підтвердити</button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

@@ -19,7 +19,7 @@ export class AuthService {
     return this.http.post(this.loginUrl, loginData);
   }
 
-  register(registrationData: RegistrationData): Observable<any> {
+  signUp(registrationData: RegistrationData): Observable<any> {
     return this.http.post(this.registrationUrl, registrationData);
   }
 }
