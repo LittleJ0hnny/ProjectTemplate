@@ -1,6 +1,7 @@
 import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core';
-import {LoginComponent} from "../login/login.component";
+import {LoginComponent} from "../auth/login/login.component";
 import {MatDialog} from "@angular/material";
+import {Router} from "@angular/router";
 
 @Component({
   selector: 'app-header',
@@ -9,10 +10,16 @@ import {MatDialog} from "@angular/material";
   encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
+  hide:boolean = false;
+
+  firstname:string = "Ostap";
+  lastname:string = "Kravtsiv";
+
   screenWidth: number;
   screenHeight: number;
 
-  constructor(private dialog: MatDialog) {
+  constructor(private dialog: MatDialog,
+              private router: Router) {
     this.readScreenSize();
   }
 
@@ -34,4 +41,11 @@ export class HeaderComponent implements OnInit {
 
     dialogRef.afterClosed().subscribe(result => {});
   }
+
+  navigateByRoute(path:string) {
+    console.log('Routing');
+    this.router.navigate([{outlets: {primary: path, navigationBar:path}}]);
+  }
+
+
 }

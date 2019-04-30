@@ -3,7 +3,7 @@ import {CarouselComponent} from "angular2-carousel";
 import {IImage} from "ng-simple-slideshow";
 import {DOCUMENT} from "@angular/common";
 import {MatDialog} from "@angular/material";
-import {LoginComponent} from "../login/login.component";
+import {LoginComponent} from "../auth/login/login.component";
 
 @Component({
   selector: 'app-index',

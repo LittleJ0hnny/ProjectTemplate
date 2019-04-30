@@ -8,12 +8,13 @@ import {MainNavigationComponent} from "../components/main-navigation/main-naviga
 import {AppComponent} from "../app.component";
 import {IndexComponent} from '../components/index/index.component';
 import {FormsModule, ReactiveFormsModule} from '@angular/forms';
-import {LoginComponent} from '../components/login/login.component';
-import {RegistrationComponent} from '../components/registration/registration.component';
+import {LoginComponent} from '../components/auth/login/login.component';
+import {RegistrationComponent} from '../components/auth/registration/registration.component';
 import {AuthService} from "../services/auth/auth.service";
 import {HttpClientModule} from "@angular/common/http";
 import {SlideshowModule} from "ng-simple-slideshow";
 import {CarouselModule} from "angular2-carousel";
+import {ProfileComponent} from "../components/profile/profile.component";
 
 @NgModule({
   declarations: [
@@ -21,6 +22,7 @@ import {CarouselModule} from "angular2-carousel";
     HeaderComponent,
     MainNavigationComponent,
     IndexComponent,
+    ProfileComponent,
     LoginComponent,
     RegistrationComponent
   ],

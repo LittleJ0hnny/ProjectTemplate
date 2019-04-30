@@ -1,8 +1,11 @@
 <!--The content below is only a placeholder and can be replaced.-->
 <header>
-  <app-header class="container in-line elements-disposition"></app-header>
+  <app-header class="flex-container in-line elements-disposition"></app-header>
 </header>
-<router-outlet class="container"></router-outlet>
-<footer class = "container"></footer>
+<nav>
+  <router-outlet name="navigationBar" class="flex-container"></router-outlet>
+</nav>
+<router-outlet class="flex-container"></router-outlet>
+<footer class = "flex-container"></footer>
 
 

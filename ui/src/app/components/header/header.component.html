@@ -1,9 +1,19 @@
-<div class="container in-line">
-  <img src="../../../assets/images/nestpic_1394718312__shop-icon.png" alt="Your Marketplace" height="75px" width="75px">
+<div class="flex-container in-line">
+  <img src="../../../assets/images/shop-icon.png" alt="Your Marketplace" height="75px" width="75px">
   <div class="header-label">
     <p>Your Marketplace</p>
   </div>
 </div>
-<button mat-button style="position: absolute; right: 0;" (click)="openDialog()"><b>Вхід</b></button>
+<div style="position: absolute; right: 25px;">
+  Вітаємо,
+  <span class="auth-link" *ngIf="hide" (click)="openDialog()">увійдіть у свій обліковий запис</span>
+  <span class="auth-link" *ngIf="!hide" [matMenuTriggerFor]="menu" [innerHTML]="firstname + ' ' + lastname"></span>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item (click)="navigateByRoute('profile')">Профіль</button>
+    <button mat-menu-item>Мої замовлення</button>
+    <button mat-menu-item>Мої товари</button>
+    <button mat-menu-item>Статистика</button>
+  </mat-menu>
+</div>
 
 

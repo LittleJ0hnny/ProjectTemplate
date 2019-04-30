@@ -1,7 +1,7 @@
 <div>
   <h1 mat-dialog-title style="text-align: center;">Вхід</h1>
 
-  <div class="container in-line">
+  <div class="flex-container in-line">
     <div mat-dialog-content class="sign-in-block">
       <form [formGroup]="loginForm" (ngSubmit)="login()">
         <div>
@@ -25,7 +25,7 @@
 
     <mat-divider [vertical]="true"></mat-divider>
 
-    <div class="sign-up-block container in-column">
+    <div class="sign-up-block flex-container in-column">
       <button class="loginBtn loginBtn--facebook">
         Login with Facebook
       </button>

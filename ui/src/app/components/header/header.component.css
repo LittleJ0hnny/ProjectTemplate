@@ -1,3 +1,12 @@
+.auth-link {
+  text-decoration: underline;
+}
+
+.auth-link:hover {
+  color: darkred;
+  cursor: pointer;
+}
+
 .header-label {
   font-size: 3em;
   font-weight: bolder;

@@ -1,7 +1,7 @@
 import {Component, HostListener, Inject, OnInit, ViewEncapsulation} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {LoginData} from "./loginData";
-import {AuthService} from "../../services/auth/auth.service";
+import {AuthService} from "../../../services/auth/auth.service";
 import {MAT_DIALOG_DATA, MatDialog, MatDialogRef} from "@angular/material";
 import {RegistrationComponent} from "../registration/registration.component";
 
