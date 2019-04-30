@@ -1,5 +1,6 @@
-.header-common {
-  flex-direction: row;
-  flex-grow: 1;
+.elements-disposition {
+  position: relative;
+  justify-content: center;
+  align-items: center;
 }
 

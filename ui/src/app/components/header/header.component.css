@@ -1,3 +1,9 @@
+.header-label {
+  font-size: 3em;
+  font-weight: bolder;
+  margin: -50px 0 -50px 10px;
+}
+
 .my-dialog .mat-dialog-container {
   border: solid lightskyblue;
   border-radius: 25px;

@@ -57,7 +57,6 @@
           <mat-form-field>
             <input matInput placeholder="Введіть пароль ще раз" formControlName="confirmPassword"
                    [type]="hide ? 'password' : 'text'">
-            <mat-icon matSuffix>{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             <mat-error
               *ngIf="confirmPasswordControl.hasError('MatchPassword') && !confirmPasswordControl.hasError('required')">
               Паролі не співпадають
