@@ -9,7 +9,7 @@
   <span class="auth-link" *ngIf="hide" (click)="openDialog()">увійдіть у свій обліковий запис</span>
   <span class="auth-link" *ngIf="!hide" [matMenuTriggerFor]="menu" [innerHTML]="firstname + ' ' + lastname"></span>
   <mat-menu #menu="matMenu">
-    <button mat-menu-item (click)="navigateByRoute('profile')">Профіль</button>
+    <button mat-menu-item (click)="navigateToProfilePage()">Профіль</button>
     <button mat-menu-item>Мої замовлення</button>
     <button mat-menu-item>Мої товари</button>
     <button mat-menu-item>Статистика</button>

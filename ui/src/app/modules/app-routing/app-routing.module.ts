@@ -6,12 +6,20 @@ import {RegistrationComponent} from "../../components/auth/registration/registra
 import {ProfileComponent} from "../../components/profile/profile.component";
 import {MainNavigationComponent} from "../../components/main-navigation/main-navigation.component";
 
+export const routesConst = {
+  index: 'index',
+  profile: 'profile'
+};
+
+export const outletConst = {
+  mainNavBar: 'navigationBar'
+};
 
 const routes: Routes = [
   {path: '', redirectTo: '/index', pathMatch: 'full'},
-  {path: 'index', component: IndexComponent},
-  {path: 'profile', component: ProfileComponent},
-  {path: 'profile', component: MainNavigationComponent, outlet: 'navigationBar'}
+  {path: routesConst.index, component: IndexComponent},
+  {path: routesConst.profile, component: ProfileComponent},
+  {path: routesConst.profile, component: MainNavigationComponent, outlet: outletConst.mainNavBar}
   ];
 
 @NgModule({

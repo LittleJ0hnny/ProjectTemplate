@@ -2,6 +2,7 @@ import {Component, HostListener, OnInit, ViewEncapsulation} from '@angular/core'
 import {LoginComponent} from "../auth/login/login.component";
 import {MatDialog} from "@angular/material";
 import {Router} from "@angular/router";
+import {routesConst} from "../../modules/app-routing/app-routing.module";
 
 @Component({
   selector: 'app-header',
@@ -42,10 +43,7 @@ export class HeaderComponent implements OnInit {
     dialogRef.afterClosed().subscribe(result => {});
   }
 
-  navigateByRoute(path:string) {
-    console.log('Routing');
-    this.router.navigate([{outlets: {primary: path, navigationBar:path}}]);
+  navigateToProfilePage() {
+    this.router.navigate([{outlets: {primary: routesConst.profile, navigationBar: routesConst.profile}}]);
   }
-
-
 }
