@@ -15,6 +15,7 @@ import {HttpClientModule} from "@angular/common/http";
 import {SlideshowModule} from "ng-simple-slideshow";
 import {CarouselModule} from "angular2-carousel";
 import {ProfileComponent} from "../components/profile/profile.component";
+import {PrimeNgModule} from "./prime-ng/prime-ng.module";
 
 @NgModule({
   declarations: [
@@ -33,6 +34,7 @@ import {ProfileComponent} from "../components/profile/profile.component";
   imports: [
     BrowserModule,
     AngularMaterialModule,
+    PrimeNgModule,
     AppRoutingModule,
     FormsModule,
     ReactiveFormsModule,

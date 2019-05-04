@@ -11,7 +11,7 @@
   },
   "private": true,
   "dependencies": {
-    "@angular/animations": "^6.1.9",
+    "@angular/animations": "^6.1.10",
     "@angular/cdk": "^6.4.7",
     "@angular/common": "^6.1.0",
     "@angular/compiler": "^6.1.0",
@@ -29,6 +29,8 @@
     "jquery": "^3.4.0",
     "ng-simple-slideshow": "^1.2.8",
     "popper": "^1.0.1",
+    "primeicons": "^1.0.0",
+    "primeng": "^7.1.2",
     "rxjs": "~6.2.0",
     "zone.js": "^0.8.29"
   },
