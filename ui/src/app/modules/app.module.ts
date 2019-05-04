@@ -26,6 +26,10 @@ import {ProfileComponent} from "../components/profile/profile.component";
     LoginComponent,
     RegistrationComponent
   ],
+  entryComponents: [
+    LoginComponent,
+    RegistrationComponent
+  ],
   imports: [
     BrowserModule,
     AngularMaterialModule,
