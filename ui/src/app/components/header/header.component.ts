@@ -11,7 +11,7 @@ import {routesConst} from "../../modules/app-routing/app-routing.module";
   encapsulation: ViewEncapsulation.None
 })
 export class HeaderComponent implements OnInit {
-  hide:boolean = true;
+  hide:boolean = false;
 
   firstname:string = "Ostap";
   lastname:string = "Kravtsiv";

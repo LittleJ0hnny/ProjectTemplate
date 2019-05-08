@@ -30,7 +30,7 @@
     "ng-simple-slideshow": "^1.2.8",
     "popper": "^1.0.1",
     "primeicons": "^1.0.0",
-    "primeng": "^7.1.2",
+    "primeng": "^6.1.0",
     "rxjs": "~6.2.0",
     "zone.js": "^0.8.29"
   },

@@ -1,3 +1,38 @@
-<p>
-  profile works!
-</p>
+<div class="flex-container in-column">
+  <div class="flex-container in-line">
+    <div class="flex-container in-column">
+      <img [src]="imagePreview" height="200px" width="180px">
+      <input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
+      <button (click)="selectFile.click()">Select File</button>
+    </div>
+    <div>
+      <p-panel header="Profile">
+        <div>
+          <div><strong>Ім'я</strong></div>
+          <div>{{ profile.firstname }}</div>
+        </div>
+        <div>
+          <div><strong>Прізвище</strong></div>
+          <div>{{ profile.lastname }}</div>
+        </div>
+        <div>
+          <div><strong>Стать</strong></div>
+          <div>{{ profile.lastname }}</div>
+        </div>
+        <div>
+          <div><strong>Дата народження</strong></div>
+          <div>{{ profile.lastname }}</div>
+        </div>
+
+        <div>
+          <button pButton type="button" icon="fa-pencil" class="ui-button-secondary" (click)="toggleEdit('address')"></button>
+        </div>
+      </p-panel>
+    </div>
+  </div>
+  <div>
+
+  </div>
+</div>
+
+
