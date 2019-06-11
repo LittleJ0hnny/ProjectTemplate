@@ -7,31 +7,24 @@
     </div>
     <div>
       <p-panel header="Profile">
-        <div>
-          <div><strong>Ім'я</strong></div>
-          <div>{{ profile.firstname }}</div>
-        </div>
-        <div>
-          <div><strong>Прізвище</strong></div>
-          <div>{{ profile.lastname }}</div>
-        </div>
-        <div>
-          <div><strong>Стать</strong></div>
-          <div>{{ profile.lastname }}</div>
-        </div>
-        <div>
-          <div><strong>Дата народження</strong></div>
-          <div>{{ profile.lastname }}</div>
-        </div>
+        <form [formGroup]="profileForm" action="">
+          <div class="form-group flex-container in-line">
+            <label for="firstName"><strong>Ім'я : </strong></label>
+            <div>{{ profileData.firstName }}</div>
+            <input type="text" id="firstName" formControlName="firstName"/>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" (click)="toggleEdit('firstName')"></p-button>
+          </div>
 
-        <div>
-          <button pButton type="button" icon="fa-pencil" class="ui-button-secondary" (click)="toggleEdit('address')"></button>
-        </div>
+          <div class="form-group flex-container in-line">
+            <label for="lastName"><strong>Прізвище : </strong></label>
+            <div>{{ profileData.lastName }}</div>
+            <input type="text" id="lastName" formControlName="lastName"/>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" (click)="toggleEdit('lastName')"></p-button>
+          </div>
+          <hr/>
+        </form>
       </p-panel>
     </div>
-  </div>
-  <div>
-
   </div>
 </div>
 

@@ -13,9 +13,12 @@ import {RegistrationComponent} from "../registration/registration.component";
 })
 export class LoginComponent implements OnInit {
   hide: boolean = true;
+
+  //Profile Form and Model
   loginForm: FormGroup;
   loginData: LoginData;
 
+  //Form controls
   loginControl: FormControl = new FormControl('', [
     Validators.required,
     Validators.maxLength(25)
@@ -51,7 +54,6 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    console.log("Login");
     this.loginData = this.loginForm.value;
     this.authService.signIn(this.loginData).subscribe();
   }

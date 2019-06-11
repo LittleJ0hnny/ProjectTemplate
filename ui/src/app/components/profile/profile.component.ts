@@ -1,7 +1,8 @@
+import {FormBuilder, FormControl, FormGroup, Validators} from "@angular/forms";
 import {Component, HostListener, Inject, OnInit} from '@angular/core';
 import {DOCUMENT} from "@angular/common";
+import {ProfileData} from "./profileData";
 import {ButtonModule} from 'primeng/button';
-import {PanelModule} from 'primeng/panel';
 
 @Component({
   selector: 'app-profile',
@@ -11,15 +12,35 @@ import {PanelModule} from 'primeng/panel';
 export class ProfileComponent implements OnInit {
   screenHeight: number;
 
+  //Profile Form and Model
+  profileForm: FormGroup;
+  profileData: ProfileData;
+
   uploadedFile: File;
 
   imagePreview: string;
 
-  constructor(@Inject(DOCUMENT) private document: any) {
+  //Form controls
+  firstNameControl: FormControl = new FormControl('', [
+    Validators.maxLength(255)
+  ]);
+  lastNameControl: FormControl = new FormControl('', [
+    Validators.maxLength(255)
+  ]);
+
+  constructor(private formBuilder: FormBuilder,
+              @Inject(DOCUMENT) private document: any) {
     this.calculateSliderHeight();
+    this.profileData = new ProfileData();
+    this.profileData.firstName = 'Ostap';
+    this.profileData.lastName = 'Kravtsiv';
   }
 
   ngOnInit() {
+    this.profileForm = this.formBuilder.group({
+      firstName: this.firstNameControl,
+      lastName: this.lastNameControl
+    });
     this.imagePreview = 'https://previews.123rf.com/images/artemstepanov/artemstepanov1606/artemstepanov160601228/57881761-vector-male-face-avatar-template-pictogram-button-round-trendy-flat-icon-with-man-for-business-inter.jpg';
   }
 
@@ -35,5 +56,9 @@ export class ProfileComponent implements OnInit {
       this.imagePreview = reader.result;
     };
     reader.readAsDataURL(this.uploadedFile);
+  }
+
+  toggleEdit(data: string) {
+    alert(data);
   }
 }
