@@ -4,24 +4,83 @@
       <img [src]="imagePreview" height="200px" width="180px">
       <input style="display: none" type="file" (change)="onFileUpload($event)" #selectFile>
       <button (click)="selectFile.click()">Select File</button>
+      <button>Clear</button>
     </div>
     <div>
-      <p-panel header="Profile">
+      <p-panel header="Профіль">
         <form [formGroup]="profileForm" action="">
           <div class="form-group flex-container in-line">
-            <label for="firstName"><strong>Ім'я : </strong></label>
-            <div>{{ profileData.firstName }}</div>
-            <input type="text" id="firstName" formControlName="firstName"/>
-            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" (click)="toggleEdit('firstName')"></p-button>
+            <div class="profileFormLabel">
+              <label class="rightPadding" for="firstName"><strong>Ім'я : </strong></label>
+              <div class="doubleSidePadding" *ngIf="!firstName">{{ profileData.firstName }}</div>
+            </div>
+            <input class="doubleSidePadding" *ngIf="firstName" type="text" id="firstName" placeholder="{{ profileData.firstName }}"
+                   formControlName="firstName"/>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" class="leftPadding"
+                      (click)="changeVisibility('firstName')"></p-button>
           </div>
 
           <div class="form-group flex-container in-line">
-            <label for="lastName"><strong>Прізвище : </strong></label>
-            <div>{{ profileData.lastName }}</div>
-            <input type="text" id="lastName" formControlName="lastName"/>
-            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" (click)="toggleEdit('lastName')"></p-button>
+            <div class="profileFormLabel">
+              <label class="rightPadding" for="lastName"><strong>Прізвище : </strong></label>
+              <div class="doubleSidePadding" *ngIf="!lastName">{{ profileData.lastName }}</div>
+            </div>
+            <input class="doubleSidePadding" *ngIf="lastName" type="text" id="lastName" placeholder="{{ profileData.lastName }}"
+                   formControlName="lastName"/>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" class="leftPadding"
+                      (click)="changeVisibility('lastName')"></p-button>
           </div>
+
           <hr/>
+
+          <div class="form-group flex-container in-line">
+            <div class="profileFormLabel">
+              <label class="rightPadding"><strong>Стать : </strong></label>
+              <div class="doubleSidePadding" *ngIf="!gender">{{ profileData.gender }}</div>
+              <div class="doubleSidePadding" *ngIf="gender">
+                <p-radioButton name="gender" value="male" label="Чоловік" class="leftPadding" formControlName="gender"></p-radioButton>
+                <p-radioButton name="gender" value="female" label="Жінка" formControlName="gender"></p-radioButton>
+              </div>
+            </div>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" class="leftPadding"
+                      (click)="changeVisibility('gender')"></p-button>
+          </div>
+          <div class="form-group flex-container in-line">
+            <div class="profileFormLabel">
+              <label class="rightPadding"><strong>Дата народження : </strong></label>
+              <div class="doubleSidePadding" *ngIf="!birthDate">{{ profileData.birthDate }}</div>
+            </div>
+            <p-calendar class="doubleSidePadding" *ngIf="birthDate" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+                        formControlName="birthDate"></p-calendar>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" class="leftPadding"
+                      (click)="changeVisibility('birthDate')"></p-button>
+          </div>
+
+          <hr/>
+
+          <hr/>
+
+          <div class="form-group flex-container in-line">
+            <div class="profileFormLabel">
+              <label class="rightPadding"><strong>Поштовий індекс : </strong></label>
+              <div class="doubleSidePadding" *ngIf="!zipCode">{{ profileData.zipCode }}</div>
+            </div>
+            <p-inputMask class="doubleSidePadding" *ngIf="zipCode" mask="99999" placeholder="{{profileData.zipCode}}"
+                         formControlName="zipCode"></p-inputMask>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" style="padding-left: 5px"
+                      (click)="changeVisibility('zipCode')"></p-button>
+          </div>
+
+          <div class="form-group flex-container in-line">
+            <div class="profileFormLabel">
+              <label class="rightPadding"><strong>Номер телефону : </strong></label>
+              <div class="doubleSidePadding" *ngIf="!mobilePhone">{{ profileData.mobilePhone }}</div>
+            </div>
+            <p-inputMask class="doubleSidePadding" *ngIf="mobilePhone" mask="(999) 999-9999" placeholder="{{profileData.mobilePhone}}"
+                         formControlName="mobilePhone"></p-inputMask>
+            <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" style="padding-left: 5px"
+                      (click)="changeVisibility('mobilePhone')"></p-button>
+          </div>
         </form>
       </p-panel>
     </div>

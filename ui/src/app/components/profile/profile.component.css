@@ -1,0 +1,19 @@
+.profileFormLabel {
+  display: flex;
+  flex-direction: row;
+  padding-top: 5px;
+}
+
+.leftPadding {
+  padding-left: 5px;
+}
+
+.rightPadding {
+  padding-right: 5px;
+}
+
+.doubleSidePadding {
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
