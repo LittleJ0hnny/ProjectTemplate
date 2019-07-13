@@ -15,17 +15,22 @@ for dev dependencies npm install --save-dev @angular-devkit/build-angular
 
 SET @@global.time_zone='+00:00'
 
-Basic Auth
 
-rootClient
-rootPassword
+Generate Token {
+    url: http://localhost:8200/oauth/token
 
-Headers
-
-"Content-Type" "application/x-www-form-urlencoded"
-
-body {
-grant_type password
-user rootUser
-password rootUserPassword
+    Basic Auth {
+        Client ID: rootClient
+        Client Password: rootPassword
+    }
+    
+    Headers {
+        "Content-Type" "application/x-www-form-urlencoded"
+    }
+    
+    body {
+        grant_type: password
+        username: rootUser
+        password: rootUserPassword
+    }
 }

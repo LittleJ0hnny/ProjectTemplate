@@ -5,8 +5,8 @@ networks:
 
 services:
 
-  mysql:
-    container_name: mysql-server
+  auth_db:
+    container_name: auth_db-server
     image: mysql/mysql-server:8.0.13
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -19,6 +19,21 @@ services:
       - mp-network
     tty:
       true
+
+    prod_db:
+      container_name: prod_db-server
+      image: mysql/mysql-server:8.0.13
+      environment:
+        - MYSQL_ROOT_PASSWORD=root
+        - MYSQL_DATABASE=cred_db
+        - MYSQL_USER=admin
+        - MYSQL_PASSWORD=admin
+      expose:
+        - 3306
+      networks:
+        - mp-network
+      tty:
+        true
 
   config-server:
     container_name: config-server
@@ -105,7 +120,7 @@ services:
     environment:
       - DISCOVERY_HOST=discovery-server
       - DISCOVERY_PORT=8761
-      - MYSQL_HOST=mysql-server
+      - MYSQL_HOST=auth_db-server
       - MYSQL_PORT=3306
     expose:
       - 8200
@@ -116,4 +131,30 @@ services:
     depends_on:
       - config-server
       - discovery-server
-      - mysql
+      - auth_db
+
+  product-server:
+    container_name: product-server
+    build:
+      context: ./product
+      dockerfile: Dockerfile
+      args:
+        jarName: product
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
+    image: product-server:latest
+    environment:
+      - DISCOVERY_HOST=discovery-server
+      - DISCOVERY_PORT=8761
+      - MYSQL_HOST=prod_db-server
+      - MYSQL_PORT=3306
+    expose:
+      - 8500
+    networks:
+      - mp-network
+    tty:
+      true
+    depends_on:
+      - config-server
+      - discovery-server
+      - prod_db

@@ -2,6 +2,5 @@ spring:
   cloud:
     config:
       name: discovery
-      uri: http://${CONFIG_HOST:localhost}:${CONFIG_PORT:8888}
       username: configUser
       password: configPassword

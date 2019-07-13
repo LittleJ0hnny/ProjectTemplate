@@ -3,4 +3,5 @@ include 'config'
 include 'discovery'
 include 'gateway'
 include 'auth'
-
+include 'img-service'
+include 'product-service'

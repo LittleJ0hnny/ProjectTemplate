@@ -1,14 +1,16 @@
 buildscript {
     ext {
-        springBootVersion = '2.0.6.RELEASE'
+        springBoot_version = '2.0.6.RELEASE'
         mysql_connector_version = '8.0.13'
         liquibase_version = '3.6.2'
+        javassist_version = '3.25.0-GA'
+        jaxb_version = '2.3.2'
     }
     repositories {
         mavenCentral()
     }
     dependencies {
-        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}")
+        classpath("org.springframework.boot:spring-boot-gradle-plugin:${springBoot_version}")
     }
 }
 
@@ -28,18 +30,18 @@ subprojects {
     }
 
     ext {
-        springCloudVersion = 'Finchley.SR1'
+        springCloud_version = 'Finchley.SR1'
     }
 
     dependencyManagement {
         imports {
-            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloudVersion}"
+            mavenBom "org.springframework.cloud:spring-cloud-dependencies:${springCloud_version}"
         }
     }
 
     dependencies {
         implementation('org.springframework.boot:spring-boot-starter')
-        implementation('javax.xml.bind:jaxb-api:2.3.0')
+        implementation("org.glassfish.jaxb:jaxb-runtime:${jaxb_version}")
         testImplementation('org.springframework.boot:spring-boot-starter-test')
         compileOnly('org.projectlombok:lombok:1.18.4')
     }

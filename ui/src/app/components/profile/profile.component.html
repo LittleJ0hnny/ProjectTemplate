@@ -58,6 +58,18 @@
 
           <hr/>
 
+          <div class="form-group flex-container in-column">
+            <div class="profileFormLabel flex-container in-line">
+              <label class="rightPadding"><strong>Адресса : </strong></label>
+              <span>{{profileData.address.country}}, {{profileData.address.city}}, {{profileData.address.village}}, {{profileData.address.street}}</span>
+              <p-button icon="pi pi-pencil" styleClass="ui-button-secondary" style="padding-left: 5px"
+                        (click)="changeVisibility('zipCode')"></p-button>
+            </div>
+            <div>
+
+            </div>
+          </div>
+
           <hr/>
 
           <div class="form-group flex-container in-line">

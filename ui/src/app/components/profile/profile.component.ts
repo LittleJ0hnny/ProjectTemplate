@@ -56,6 +56,10 @@ export class ProfileComponent implements OnInit {
     this.profileData.birthDate = new Date();
     this.profileData.zipCode = 79005;
     this.profileData.mobilePhone = '(063)-903-3115';
+    this.profileData.address.country = 'Ukraine';
+    this.profileData.address.city = 'Lviv';
+    this.profileData.address.village = 'Lviv';
+    this.profileData.address.street = 'Lviv';
   }
 
   ngOnInit() {
@@ -111,9 +115,5 @@ export class ProfileComponent implements OnInit {
         break;
       }
     }
-  }
-
-  toggleEdit(data: string) {
-    alert(data);
   }
 }

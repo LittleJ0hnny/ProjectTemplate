@@ -17,6 +17,7 @@ dependencies {
     implementation("org.springframework.boot:spring-boot-starter-web")
     implementation("mysql:mysql-connector-java:${mysql_connector_version}")
     implementation("org.liquibase:liquibase-core:${liquibase_version}")
+    implementation("org.javassist:javassist:${javassist_version}")
 
     liquibase ("org.liquibase:liquibase-core:${liquibase_version}")
     liquibase ("mysql:mysql-connector-java:${mysql_connector_version}")
