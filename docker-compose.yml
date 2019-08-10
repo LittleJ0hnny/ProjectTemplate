@@ -6,7 +6,8 @@ networks:
 services:
 
   auth_db:
-    container_name: auth_db-server
+    #Container name used as image name and host name for current container.
+    container_name: auth_db-service
     image: mysql/mysql-server:8.0.13
     environment:
       - MYSQL_ROOT_PASSWORD=root
@@ -20,33 +21,63 @@ services:
     tty:
       true
 
-    prod_db:
-      container_name: prod_db-server
-      image: mysql/mysql-server:8.0.13
-      environment:
-        - MYSQL_ROOT_PASSWORD=root
-        - MYSQL_DATABASE=cred_db
-        - MYSQL_USER=admin
-        - MYSQL_PASSWORD=admin
-      expose:
-        - 3306
-      networks:
-        - mp-network
-      tty:
-        true
+  prod_db:
+    container_name: prod_db-service
+    image: mysql/mysql-server:8.0.13
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=prod_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    expose:
+      - 3306
+    networks:
+      - mp-network
+    tty:
+      true
 
-  config-server:
-    container_name: config-server
+  order_db:
+    container_name: order_db-service
+    image: mysql/mysql-server:8.0.13
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=order_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    expose:
+      - 3306
+    networks:
+      - mp-network
+    tty:
+      true
+
+  operation_db:
+    container_name: operation_db-service
+    image: mysql/mysql-server:8.0.13
+    environment:
+      - MYSQL_ROOT_PASSWORD=root
+      - MYSQL_DATABASE=operation_db
+      - MYSQL_USER=admin
+      - MYSQL_PASSWORD=admin
+    expose:
+      - 3306
+    networks:
+      - mp-network
+    tty:
+      true
+
+  config-sevice:
+    container_name: config-service
     build:
-      context: ./config
+      context: ./config-service
       dockerfile: Dockerfile
       args:
-        jarName: config
+        jarName: config-service
         jarVersion: 1.0-SNAPSHOT
         bootstrapFile: bootstrap.sh
-    image: config-server:latest
+    image: config-service:latest
     environment:
-      - DISCOVERY_HOST=discovery-server
+      - DISCOVERY_HOST=discovery-service
       - DISCOVERY_PORT=8761
     expose:
       - 8888
@@ -55,18 +86,18 @@ services:
     tty:
       true
 
-  discovery-server:
-    container_name: discovery-server
+  discovery-service:
+    container_name: discovery-service
     build:
-      context: ./discovery
+      context: ./discovery-service
       dockerfile: Dockerfile
       args:
-        jarName: discovery
+        jarName: discovery-service
         jarVersion: 1.0-SNAPSHOT
         bootstrapFile: bootstrap.sh
-    image: discovery-server:latest
+    image: discovery-service:latest
     environment:
-      - CONFIG_HOST=config-server
+      - CONFIG_HOST=config-service
       - CONFIG_PORT=8888
     expose:
       - 8761
@@ -75,22 +106,22 @@ services:
     tty:
       true
     depends_on:
-      - config-server
+      - config-service
 
   gateway:
-    container_name: gateway-server
+    container_name: gateway-service
     build:
-      context: ./gateway
+      context: ./gateway-service
       dockerfile: Dockerfile
       args:
-        jarName: gateway
+        jarName: gateway-service
         jarVersion: 1.0-SNAPSHOT
         bootstrapFile: bootstrap.sh
-    image: gateway-server:latest
+    image: gateway-service-container:latest
     environment:
-    - DISCOVERY_HOST=discovery-server
+    - DISCOVERY_HOST=discovery-service
     - DISCOVERY_PORT=8761
-    - AUTH_HOST=auth-server
+    - AUTH_HOST=auth-service
     - AUTH_PORT=8200
     expose:
       - 8100
@@ -104,23 +135,23 @@ services:
     tty:
       true
     depends_on:
-      - config-server
-      - discovery-server
+      - config-service
+      - discovery-service
 
-  auth-server:
-    container_name: auth-server
+  auth-service:
+    container_name: auth-service
     build:
-      context: ./auth
+      context: ./auth-service
       dockerfile: Dockerfile
       args:
-        jarName: auth
+        jarName: auth-service
         jarVersion: 1.0-SNAPSHOT
         bootstrapFile: bootstrap.sh
-    image: auth-server:latest
+    image: auth-service:latest
     environment:
-      - DISCOVERY_HOST=discovery-server
+      - DISCOVERY_HOST=discovery-service
       - DISCOVERY_PORT=8761
-      - MYSQL_HOST=auth_db-server
+      - MYSQL_HOST=auth_db-service
       - MYSQL_PORT=3306
     expose:
       - 8200
@@ -129,24 +160,24 @@ services:
     tty:
       true
     depends_on:
-      - config-server
-      - discovery-server
+      - config-service
+      - discovery-service
       - auth_db
 
-  product-server:
-    container_name: product-server
+  product-service:
+    container_name: product-service
     build:
-      context: ./product
+      context: ./product-service
       dockerfile: Dockerfile
       args:
-        jarName: product
+        jarName: product-service
         jarVersion: 1.0-SNAPSHOT
         bootstrapFile: bootstrap.sh
-    image: product-server:latest
+    image: product-service:latest
     environment:
-      - DISCOVERY_HOST=discovery-server
+      - DISCOVERY_HOST=discovery-service
       - DISCOVERY_PORT=8761
-      - MYSQL_HOST=prod_db-server
+      - MYSQL_HOST=prod_db-service
       - MYSQL_PORT=3306
     expose:
       - 8500
@@ -155,6 +186,58 @@ services:
     tty:
       true
     depends_on:
-      - config-server
-      - discovery-server
+      - config-service
+      - discovery-service
       - prod_db
+
+  order-service:
+    container_name: order-service
+    build:
+      context: ./order-service
+      dockerfile: Dockerfile
+      args:
+        jarName: order-service
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
+    image: order-service:latest
+    environment:
+      - DISCOVERY_HOST=discovery-service
+      - DISCOVERY_PORT=8761
+      - MYSQL_HOST=prod_db-service
+      - MYSQL_PORT=3306
+    expose:
+      - 8600
+    networks:
+      - mp-network
+    tty:
+      true
+    depends_on:
+      - config-service
+      - discovery-service
+      - order_db
+
+  operation-service:
+    container_name: operation-service
+    build:
+      context: ./operation-service
+      dockerfile: Dockerfile
+      args:
+        jarName: operation-service
+        jarVersion: 1.0-SNAPSHOT
+        bootstrapFile: bootstrap.sh
+    image: operation-service:latest
+    environment:
+      - DISCOVERY_HOST=discovery-service
+      - DISCOVERY_PORT=8761
+      - MYSQL_HOST=prod_db-service
+      - MYSQL_PORT=3306
+    expose:
+      - 8700
+    networks:
+      - mp-network
+    tty:
+      true
+    depends_on:
+      - config-service
+      - discovery-service
+      - operation_db
