@@ -6,7 +6,7 @@ configurations {
 }
 
 bootJar {
-    mainClassName = 'com.littlejohnny.auth.AuthServiceStarter'
+    mainClassName = "com.littlejohnny.auth.AuthServiceStarter"
 }
 
 dependencies {

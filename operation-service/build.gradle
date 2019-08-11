@@ -1,27 +1,34 @@
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
-configurations {
-    liquibase
-}
-
 bootJar {
-    mainClassName = 'com.littlejohnny.OrderServiceStarter'
+    mainClassName = "com.littlejohnny.operation.OperationServiceStarter"
 }
 
-dependencies {
-    implementation('org.springframework.cloud:spring-cloud-starter-netflix-eureka-client')
-    implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-    implementation('org.springframework.security.oauth:spring-security-oauth2')
-    implementation('org.springframework.cloud:spring-cloud-starter-openfeign')
-    implementation('org.springframework.cloud:spring-cloud-starter-security')
-    implementation('org.springframework.cloud:spring-cloud-starter-config')
-    implementation('org.springframework.boot:spring-boot-starter-web')
-    implementation('org.springframework.security:spring-security-jwt')
-    implementation("mysql:mysql-connector-java:${mysql_connector_version}")
-    implementation("org.liquibase:liquibase-core:${liquibase_version}")
-    implementation("org.javassist:javassist:${javassist_version}")
+task generateBackup(type: JavaExec) {
+    group = "Liquibase"
+    classpath configurations.liquibase
+    main = "liquibase.integration.commandline.Main"
+    args "--changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml"
+    args "--username=admin"
+    args "--password=admin"
+    args "--url=jdbc:mysql://localhost:3306/operation_db?serverTimezone=UTC"
+    args "--logLevel=debug"
+    args "--driver=com.mysql.jdbc.Driver"
+    args "--diffTypes=\"tables\", \"columns\", \"views\", \"primaryKeys\", \"indexes\", \"foreignKeys\", \"sequences\", \"data\""
+    args "generateChangeLog"
+}
 
-    liquibase ("org.liquibase:liquibase-core:${liquibase_version}")
-    liquibase ("mysql:mysql-connector-java:${mysql_connector_version}")
+task updateDb(type: JavaExec) {
+    group = "Liquibase"
+    classpath configurations.liquibase
+    main = "liquibase.integration.commandline.Main"
+    args "--changeLogFile=src/main/resources/db/changelog/db.changelog-master.xml"
+    args "--username=admin"
+    args "--password=admin"
+    args "--url=jdbc:mysql://localhost:3306/operation_db?createDatabaseIfNotExist=true&serverTimezone=UTC"
+    args "--driver=com.mysql.jdbc.Driver"
+    args "--logLevel=debug"
+    args "--defaultSchemaName=operation_db"
+    args "update"
 }
