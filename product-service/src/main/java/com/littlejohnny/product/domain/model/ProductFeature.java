@@ -6,18 +6,14 @@ import javax.persistence.*;
 
 @Data
 @Entity
-@Table(name = "category_attributes")
-public class Category {
+@Table(name = "features")
+public class ProductFeature {
 
     @Id
     @GeneratedValue(strategy = GenerationType.SEQUENCE)
     private Long id;
 
-    private String name;
-
     private Product product;
 
-    private CategoryAttributes categoryAttributes;
-
-    private Category parentCategory;
+    private String iconUrl;
 }

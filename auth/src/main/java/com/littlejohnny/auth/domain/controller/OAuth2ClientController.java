@@ -8,12 +8,12 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/oauth2client/")
+@RequestMapping("/oauth2clients")
 public class OAuth2ClientController {
     @Autowired
     private OAuth2ClientService oAuth2ClientService;
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity saveClient(@RequestBody OAuth2ClientDTO oAuth2ClientDTO) {
         OAuth2Client oAuth2Client = oAuth2ClientDTO.asOAuth2Client();
         oAuth2ClientService.save(oAuth2Client);

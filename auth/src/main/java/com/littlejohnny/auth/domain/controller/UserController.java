@@ -12,13 +12,13 @@ import java.util.HashSet;
 import java.util.Set;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/users")
 public class UserController {
 
     @Autowired
     private UserService userService;
 
-    @PostMapping("/save")
+    @PostMapping
     public ResponseEntity saveUser(@RequestBody UserDTO userDTO) {
         Set<Authorities> authorities = new HashSet<>();
         authorities.add(Authorities.USER);

@@ -1,6 +1,14 @@
 <?xml version="1.1" encoding="UTF-8" standalone="no"?>
 <databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog" xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.6.xsd">
     <changeSet author="Ostap (generated)" id="1548885570816-1">
+        <insert tableName="hibernate_sequence">
+            <column name="next_val" valueNumeric="1"/>
+        </insert>
+        <insert tableName="hibernate_sequence">
+            <column name="next_val" valueNumeric="1"/>
+        </insert>
+    </changeSet>
+    <changeSet author="Ostap (generated)" id="1548885570816-2">
         <insert tableName="oauth2_clients">
             <column name="id" valueNumeric="1"/>
             <column name="access_token_validity_seconds" valueNumeric="1800"/>
@@ -16,7 +24,7 @@
             <column name="scope" value="[myscope]"/>
         </insert>
     </changeSet>
-    <changeSet author="Ostap (generated)" id="1548885570816-2">
+    <changeSet author="Ostap (generated)" id="1548885570816-3">
         <insert tableName="users">
             <column name="id" valueNumeric="1"/>
             <column name="authorities" value="[USER]"/>

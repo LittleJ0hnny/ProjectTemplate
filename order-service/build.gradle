@@ -5,10 +5,6 @@ bootJar {
     mainClassName = "com.littlejohnny.order.OrderServiceStarter"
 }
 
-dependencies {
-    implementation project(':product-service')
-}
-
 task generateBackup(type: JavaExec) {
     group = "Liquibase"
     classpath configurations.liquibase

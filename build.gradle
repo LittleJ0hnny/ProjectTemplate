@@ -1,8 +1,8 @@
 buildscript {
     ext {
-        springBoot_version = '2.0.6.RELEASE'
+        springBoot_version = '2.1.7.RELEASE'
         mysql_connector_version = '8.0.13'
-        liquibase_version = '3.6.2'
+        liquibase_version = '3.7.0'
         javassist_version = '3.25.0-GA'
         jaxb_version = '2.3.2'
         lombok_version = '1.18.4'
@@ -18,7 +18,7 @@ buildscript {
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
-subprojects {
+configure(allprojects - project(':utils')) { 
     apply plugin: 'idea'
     apply plugin: 'java'
     apply plugin: 'org.springframework.boot'
@@ -31,7 +31,7 @@ subprojects {
     }
 
     ext {
-        springCloud_version = 'Finchley.SR1'
+        springCloud_version = 'Greenwich.SR2'
     }
 
     dependencyManagement {
@@ -56,15 +56,16 @@ configure([project(":operation-service"), project(":order-service"), project(":p
     dependencies {
         implementation("org.springframework.cloud:spring-cloud-starter-netflix-eureka-client")
         implementation("org.springframework.boot:spring-boot-starter-data-jpa")
-        implementation("org.springframework.security.oauth:spring-security-oauth2")
+        implementation("org.springframework.security.oauth.boot:spring-security-oauth2-autoconfigure")
         implementation("org.springframework.cloud:spring-cloud-starter-openfeign")
         implementation("org.springframework.cloud:spring-cloud-starter-security")
         implementation("org.springframework.cloud:spring-cloud-starter-config")
         implementation("org.springframework.boot:spring-boot-starter-web")
-        implementation("org.springframework.security:spring-security-jwt")
         implementation("mysql:mysql-connector-java:${mysql_connector_version}")
         implementation("org.liquibase:liquibase-core:${liquibase_version}")
         implementation("org.javassist:javassist:${javassist_version}")
+        
+        implementation project(":utils")
 
         liquibase ("org.liquibase:liquibase-core:${liquibase_version}")
         liquibase ("mysql:mysql-connector-java:${mysql_connector_version}")
