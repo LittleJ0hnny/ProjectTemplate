@@ -10,8 +10,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "wishes")
 @NoArgsConstructor
+@Table(name = "wishes")
 public class WishList {
 
     @Id

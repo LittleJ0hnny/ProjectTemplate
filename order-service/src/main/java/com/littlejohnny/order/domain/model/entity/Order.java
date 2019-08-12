@@ -1,5 +1,6 @@
 package com.littlejohnny.order.domain.model.entity;
 
+import com.littlejohnny.order.domain.model.OrderBuilder;
 import com.littlejohnny.order.domain.model.OrderState;
 import com.littlejohnny.order.domain.model.dto.OrderDTO;
 import com.littlejohnny.order.util.converters.ListToStringConverter;
@@ -12,8 +13,8 @@ import java.util.List;
 
 @Data
 @Entity
-@Table(name = "orders")
 @NoArgsConstructor
+@Table(name = "orders")
 public class Order {
 
     @Id
