@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Data
 @NoArgsConstructor
@@ -14,11 +15,14 @@ public class CategoryDTO {
 
     private String name;
 
-    private Long parentCategoryId;
+    private Long parentId;
+
+    private List<CategoryDTO> childCategories;
 
     public CategoryDTO(Category category) {
         this.id = category.getId();
         this.name = category.getName();
-        this.parentCategoryId = category.getParentCategory().getId();
+        this.parentId = category.getParentId();
+        this.childCategories = category.getChildCategories().stream().map(CategoryDTO::new).collect(Collectors.toList());
     }
 }

@@ -18,18 +18,21 @@ buildscript {
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
-configure(allprojects - project(':utils')) { 
+configure(allprojects) {
     apply plugin: 'idea'
     apply plugin: 'java'
-    apply plugin: 'org.springframework.boot'
-    apply plugin: 'io.spring.dependency-management'
 
     sourceCompatibility = 1.8
 
     repositories {
         mavenCentral()
     }
+}
 
+configure(allprojects - project(':utils')) {
+    apply plugin: 'org.springframework.boot'
+    apply plugin: 'io.spring.dependency-management'
+    
     ext {
         springCloud_version = 'Greenwich.SR2'
     }

@@ -17,7 +17,7 @@ public class GatewaySecurityConfig extends WebSecurityConfigurerAdapter {
         http.csrf().disable();
         http
                 .authorizeRequests()
-                .antMatchers("/eureka/**", "/discovery", "/authservice/oauth/token", "/authservice/oauth2client/save", "/authservice/user/save", "/actuator/**", "/configservice/**", "/image-service/**")
+                .antMatchers("/eureka/**", "/discovery", "/authservice/**", "/actuator/**", "/configservice/**", "/operation-service/**", "/product-service/**")
                 .permitAll()
                 .anyRequest()
                 .authenticated();

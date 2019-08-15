@@ -15,9 +15,11 @@ public class SecurityConfig extends ResourceServerConfigurerAdapter {
 
     @Override
     public void configure(HttpSecurity http) throws Exception {
-        http.httpBasic().disable();
+        http.csrf().disable();
         http
                 .authorizeRequests()
+                .antMatchers("/operations")
+                .permitAll()
                 .anyRequest()
                 .authenticated();
     }

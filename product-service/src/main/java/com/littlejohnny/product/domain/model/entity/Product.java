@@ -14,7 +14,7 @@ import java.util.Map;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "articles")
+@Table(name = "products")
 public class Product {
 
     @Id

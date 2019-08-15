@@ -9,7 +9,7 @@ import java.util.List;
 @Data
 @Entity
 @NoArgsConstructor
-@Table(name = "category_attributes")
+@Table(name = "categories")
 public class Category {
 
     @Id
@@ -25,6 +25,10 @@ public class Category {
     @OneToMany(mappedBy = "category", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
     private List<Attribute> attributes;
 
-    @OneToOne(fetch = FetchType.LAZY, cascade=CascadeType.ALL)
-    private Category parentCategory;
+    @Column(nullable = false)
+    private Long parentId;
+
+    @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
+    @JoinColumn(name="parentId")
+    private List<Category> childCategories;
 }
