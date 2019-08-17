@@ -1,9 +1,8 @@
 package com.littlejohnny.order.domain.model.entity;
 
-import com.littlejohnny.order.domain.model.OrderBuilder;
 import com.littlejohnny.order.domain.model.OrderState;
 import com.littlejohnny.order.domain.model.dto.OrderDTO;
-import com.littlejohnny.order.util.converters.ListToStringConverter;
+import com.littlejohnny.order.util.converters.ListOfStringsConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -30,7 +29,7 @@ public class Order {
     @Column(nullable = false, updatable = false)
     private Long buyerId;
 
-    @Convert(converter = ListToStringConverter.class)
+    @Convert(converter = ListOfStringsConverter.class)
     private List<Long> products;
 
     @Column(nullable = false)

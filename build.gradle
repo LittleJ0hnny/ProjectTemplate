@@ -6,6 +6,7 @@ buildscript {
         javassist_version = '3.25.0-GA'
         jaxb_version = '2.3.2'
         lombok_version = '1.18.4'
+        mapstruct_version = '1.3.0.Final'
     }
     repositories {
         mavenCentral()
@@ -64,6 +65,8 @@ configure([project(":operation-service"), project(":order-service"), project(":p
         implementation("org.springframework.cloud:spring-cloud-starter-security")
         implementation("org.springframework.cloud:spring-cloud-starter-config")
         implementation("org.springframework.boot:spring-boot-starter-web")
+        implementation("org.mapstruct:mapstruct:${mapstruct_version}")
+        implementation("org.mapstruct:mapstruct-processor:${mapstruct_version}")
         implementation("mysql:mysql-connector-java:${mysql_connector_version}")
         implementation("org.liquibase:liquibase-core:${liquibase_version}")
         implementation("org.javassist:javassist:${javassist_version}")

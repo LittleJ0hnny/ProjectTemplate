@@ -1,5 +1,6 @@
 package com.littlejohnny.operation.domain.controller;
 
+import com.littlejohnny.operation.domain.model.mappers.OperationMapper;
 import com.littlejohnny.operation.domain.model.dto.OperationDTO;
 import com.littlejohnny.operation.domain.model.entity.Operation;
 import com.littlejohnny.operation.domain.service.OperationService;
@@ -38,7 +39,7 @@ public class OperationController {
 
     @GetMapping("/{id}")
     public OperationDTO getOperation(@PathVariable Long id) {
-        return new OperationDTO(operationService.getOne(id));
+        return OperationMapper.INSTANCE.entityToDto(operationService.getOne(id));
     }
 }
 

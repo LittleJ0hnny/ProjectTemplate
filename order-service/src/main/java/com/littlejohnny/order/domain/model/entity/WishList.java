@@ -1,7 +1,7 @@
 package com.littlejohnny.order.domain.model.entity;
 
 import com.littlejohnny.order.domain.model.dto.WishListDTO;
-import com.littlejohnny.order.util.converters.ListToStringConverter;
+import com.littlejohnny.order.util.converters.ListOfStringsConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -21,7 +21,7 @@ public class WishList {
     @Column(nullable = false,unique = true)
     private Long employeeId;
 
-    @Convert(converter = ListToStringConverter.class)
+    @Convert(converter = ListOfStringsConverter.class)
     private List<Long> productIds;
 
     public WishList(WishListDTO wishListDTO) {

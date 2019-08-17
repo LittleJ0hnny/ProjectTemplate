@@ -1,5 +1,6 @@
 package com.littlejohnny.product.domain.controller;
 
+import com.littlejohnny.product.domain.model.mappers.CategoryMapper;
 import com.littlejohnny.product.domain.model.dto.CategoryDTO;
 import com.littlejohnny.product.domain.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,7 +22,7 @@ public class CategoryController {
 
     @GetMapping
     public CategoryDTO getFullCategoryTree() {
-        return new CategoryDTO(categoryService.getOne(ROOT_CATEGORY_ID));
+        return CategoryMapper.INSTANCE.entityToDto(categoryService.getOne(ROOT_CATEGORY_ID));
     }
 
     @PostMapping
