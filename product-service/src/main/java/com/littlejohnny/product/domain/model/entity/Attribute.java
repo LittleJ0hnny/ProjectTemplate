@@ -1,7 +1,7 @@
 package com.littlejohnny.product.domain.model.entity;
 
-import com.littlejohnny.product.domain.model.dto.AttributeDTO;
-import com.littlejohnny.product.util.coverters.MapToStringConverter;
+import com.littlejohnny.product.util.coverters.AttributesConverter;
+import com.littlejohnny.product.util.coverters.ListOfStringsConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -25,6 +25,6 @@ public class Attribute {
     @JoinColumn
     private Category category;
 
-    @Convert(converter = MapToStringConverter.class)
+    @Convert(converter = ListOfStringsConverter.class)
     private List<String> existingValues;
 }

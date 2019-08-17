@@ -1,5 +1,6 @@
 package com.littlejohnny.product.domain.model.entity;
 
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 

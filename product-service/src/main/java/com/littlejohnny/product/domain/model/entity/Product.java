@@ -1,8 +1,8 @@
 package com.littlejohnny.product.domain.model.entity;
 
-import com.littlejohnny.product.util.coverters.FeaturesListConverter;
-import com.littlejohnny.product.util.coverters.ListToStringConverter;
-import com.littlejohnny.product.util.coverters.MapToStringConverter;
+import com.littlejohnny.product.util.coverters.FeaturesConverter;
+import com.littlejohnny.product.util.coverters.ListOfStringsConverter;
+import com.littlejohnny.product.util.coverters.AttributesConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -34,13 +34,13 @@ public class Product {
     @Column(nullable = false)
     private String description;
 
-    @Convert(converter = ListToStringConverter.class)
+    @Convert(converter = ListOfStringsConverter.class)
     private List<String> imageUrls;
 
-    @Convert(converter = MapToStringConverter.class)
+    @Convert(converter = AttributesConverter.class)
     private Map<String, String> attributes;
 
-    @Convert(converter = FeaturesListConverter.class)
+    @Convert(converter = FeaturesConverter.class)
     private List<ProductFeature> productFeatures;
 
     @Column
