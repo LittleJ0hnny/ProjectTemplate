@@ -7,10 +7,10 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Converter
-public class ListOfStringsConverter implements AttributeConverter<List<String>, String> {
+public class ListOfIdsConverter implements AttributeConverter<List<Long>, String> {
 
     @Override
-    public String convertToDatabaseColumn(List<String> strings) {
+    public String convertToDatabaseColumn(List<Long> strings) {
         StringBuilder arrayWithStrings = new StringBuilder("[");
         for(int i = 0; i < strings.size(); i++) {
             arrayWithStrings.append(strings.get(i));
@@ -20,11 +20,11 @@ public class ListOfStringsConverter implements AttributeConverter<List<String>, 
     }
 
     @Override
-    public List<String> convertToEntityAttribute(String dbData) {
+    public List<Long> convertToEntityAttribute(String dbData) {
         return parseString(dbData);
     }
 
-    private List<String> parseString(String dbData) {
-        return Arrays.stream(dbData.substring(1, dbData.length()-1).split(",")).collect(Collectors.toList());
+    private List<Long> parseString(String dbData) {
+        return Arrays.stream(dbData.substring(1, dbData.length()-1).split(",")).map(Long::valueOf).collect(Collectors.toList());
     }
 }

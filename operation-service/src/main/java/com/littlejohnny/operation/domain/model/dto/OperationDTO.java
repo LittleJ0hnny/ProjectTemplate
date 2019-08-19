@@ -14,10 +14,4 @@ public class OperationDTO {
     private String info;
 
     private LocalDateTime creationTime;
-
-    public OperationDTO(Operation operation) {
-        this.id = operation.getId();
-        this.info = operation.getInfo();
-        this.creationTime = operation.getCreationTime();
-    }
 }

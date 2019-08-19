@@ -15,10 +15,4 @@ public class WishListDTO {
     private Long employeeId;
 
     private List<Long> productIds;
-
-    public WishListDTO(WishList wishList) {
-        this.id = wishList.getId();
-        this.employeeId = wishList.getEmployeeId();
-        this.productIds = wishList.getProductIds();
-    }
 }

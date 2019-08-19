@@ -23,9 +23,4 @@ public class Operation {
 
     @Column(nullable = false, updatable = false)
     private LocalDateTime creationTime;
-
-    public Operation(OperationDTO operationDTO) {
-        this.info = operationDTO.getInfo();
-        this.creationTime = DateTimeUtil.currentTime();
-    }
 }

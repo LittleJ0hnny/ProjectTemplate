@@ -1,10 +1,8 @@
 package com.littlejohnny.operation.domain.controller;
 
-import com.littlejohnny.operation.domain.model.mappers.OperationMapper;
 import com.littlejohnny.operation.domain.model.dto.OperationDTO;
-import com.littlejohnny.operation.domain.model.entity.Operation;
+import com.littlejohnny.operation.domain.model.mappers.OperationMapper;
 import com.littlejohnny.operation.domain.service.OperationService;
-import com.littlejohnny.utills.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -21,25 +19,28 @@ public class OperationController {
     private OperationService operationService;
 
     @PostMapping
-    public ResponseEntity createOperationRecord() {
-        Operation operation = new Operation();
-        operation.setInfo("Info");
-        operation.setCreationTime(DateTimeUtil.currentTime());
-        operationService.save(operation);
+    public ResponseEntity createOperationRecord(@RequestBody OperationDTO operationDTO) {
+        operationService.save(OperationMapper.INSTANCE.dtoToEntity(operationDTO));
         return ResponseEntity.created(URI.create("url")).build();
     }
 
     @GetMapping
-    public List<OperationDTO> getOperations() {
+    public List<OperationDTO> getAllOperationRecords() {
         return operationService.findAll()
                 .stream()
-                .map(OperationDTO::new)
+                .map(OperationMapper.INSTANCE::entityToDto)
                 .collect(Collectors.toList());
     }
 
     @GetMapping("/{id}")
-    public OperationDTO getOperation(@PathVariable Long id) {
+    public OperationDTO getOperationRecords(@PathVariable Long id) {
         return OperationMapper.INSTANCE.entityToDto(operationService.getOne(id));
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteOperationRecord(@PathVariable Long id) {
+        operationService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
 }
 
