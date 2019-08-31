@@ -1,5 +1,6 @@
 package com.littlejohnny.product.domain.model.entity;
 
+import com.littlejohnny.product.domain.model.dto.AttributeValueDTO;
 import com.littlejohnny.product.util.coverters.FeaturesConverter;
 import com.littlejohnny.product.util.coverters.ListOfStringsConverter;
 import com.littlejohnny.product.util.coverters.AttributesConverter;
@@ -9,7 +10,6 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import java.time.LocalDateTime;
 import java.util.List;
-import java.util.Map;
 
 @Data
 @Entity
@@ -27,8 +27,8 @@ public class Product {
     @Column(nullable = false)
     private Integer price;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
     @Column(nullable = false)
@@ -38,13 +38,13 @@ public class Product {
     private List<String> imageUrls;
 
     @Convert(converter = AttributesConverter.class)
-    private Map<String, String> attributes;
+    private List<AttributeValueDTO> attributeValues;
 
     @Convert(converter = FeaturesConverter.class)
     private List<ProductFeature> productFeatures;
 
     @Column
-    private Byte rating;
+    private Integer rating;
 
     @Column(nullable = false)
     private Long sellerId;

@@ -1,13 +1,14 @@
 package com.littlejohnny.product.util.coverters;
 
+import org.springframework.stereotype.Component;
+
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 @Converter
 public class ListOfStringsConverter implements AttributeConverter<List<String>, String> {
 

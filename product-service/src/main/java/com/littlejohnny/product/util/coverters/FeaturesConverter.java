@@ -3,6 +3,7 @@ package com.littlejohnny.product.util.coverters;
 import com.littlejohnny.product.domain.model.entity.ProductFeature;
 import com.littlejohnny.product.domain.service.ProductFeatureService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
@@ -10,11 +11,12 @@ import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 
+@Component
 @Converter
 public class FeaturesConverter implements AttributeConverter<List<ProductFeature>, String> {
 
-    @Autowired
-    private ProductFeatureService productFeatureService;
+
+    private static ProductFeatureService productFeatureService;
 
     @Override
     public String convertToDatabaseColumn(List<ProductFeature> productFeatures) {
@@ -35,5 +37,10 @@ public class FeaturesConverter implements AttributeConverter<List<ProductFeature
         return Arrays.stream(dbData.substring(1, dbData.length()-1).split(","))
                 .map(Long::valueOf)
                 .collect(Collectors.toList());
+    }
+
+    @Autowired
+    public void setProductFeatureService(ProductFeatureService productFeatureService) {
+        FeaturesConverter.productFeatureService = productFeatureService;
     }
 }

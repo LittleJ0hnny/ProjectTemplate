@@ -16,6 +16,10 @@ buildscript {
     }
 }
 
+plugins {
+    id 'net.ltgt.apt' version '0.20'
+}
+
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
@@ -53,6 +57,8 @@ configure(allprojects - project(':utils')) {
 }
 
 configure([project(":operation-service"), project(":order-service"), project(":product-service")]) {
+    apply plugin: 'net.ltgt.apt-idea'
+    
     configurations {
         liquibase
     }

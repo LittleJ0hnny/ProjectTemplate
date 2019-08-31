@@ -5,6 +5,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -14,14 +15,7 @@ public class AttributeDTO {
 
     private String name;
 
-    private List<String> existingValues;
+    private Map<Long, String> existingValues;
 
     private Long categoryId;
-
-    public AttributeDTO(Attribute attribute) {
-        this.id = attribute.getId();
-        this.name = attribute.getName();
-        this.existingValues = attribute.getExistingValues();
-        this.categoryId = attribute.getCategory().getId();
-    }
 }

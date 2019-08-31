@@ -18,6 +18,12 @@ public class OrderController {
     @Autowired
     private OrderService orderService;
 
+    @PostMapping
+    public ResponseEntity createOrder(@RequestBody OrderDTO orderDTO) {
+        orderService.save(OrderMapper.INSTANCE.dtoToEntity(orderDTO));
+        return ResponseEntity.created(URI.create("url")).build();
+    }
+
     @GetMapping("/{id}")
     public OrderDTO getOrderById(@PathVariable Long id) {
         return OrderMapper.INSTANCE.entityToDto(orderService.getOne(id));
@@ -28,9 +34,10 @@ public class OrderController {
         return orderService.findAll().stream().map(OrderMapper.INSTANCE::entityToDto).collect(Collectors.toList());
     }
 
-    @PostMapping
-    public ResponseEntity createOrder(@RequestBody OrderDTO orderDTO) {
-        orderService.save(OrderMapper.INSTANCE.dtoToEntity(orderDTO));
-        return ResponseEntity.created(URI.create("url")).build();
+    @DeleteMapping("/{id}")
+    public ResponseEntity deleteOrder(@PathVariable Long id) {
+        orderService.deleteById(id);
+        return ResponseEntity.noContent().build();
     }
+
 }

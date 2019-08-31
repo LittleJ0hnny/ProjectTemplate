@@ -6,10 +6,6 @@ import com.littlejohnny.product.domain.service.AbstractService;
 import com.littlejohnny.product.domain.service.ProductFeatureService;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.PersistenceContext;
 import java.util.List;
 
 @Service

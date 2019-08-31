@@ -1,12 +1,14 @@
 package com.littlejohnny.product.domain.model.entity;
 
 import com.littlejohnny.product.util.coverters.AttributesConverter;
+import com.littlejohnny.product.util.coverters.ListOfExistValuesConverter;
 import com.littlejohnny.product.util.coverters.ListOfStringsConverter;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Data
 @Entity
@@ -21,10 +23,29 @@ public class Attribute {
     @Column(nullable = false)
     private String name;
 
-    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn
+    @ManyToOne(fetch = FetchType.LAZY)
     private Category category;
 
-    @Convert(converter = ListOfStringsConverter.class)
-    private List<String> existingValues;
+    @Convert(converter = ListOfExistValuesConverter.class)
+    private Map<Long, String> existingValues;
+
+    public void addExistingValue(String value) {
+        if(Objects.isNull(existingValues)) {
+            existingValues = new HashMap<>();
+        }
+
+        long nextId = nextId(existingValues);
+
+        existingValues.put(nextId, value);
+    }
+
+    private Long nextId(Map<Long, String> existingValues) {
+        long nextId = existingValues.keySet()
+                .stream()
+                .sorted()
+                .max(Long::compare).orElse(0L);
+
+        return nextId == 0L ? nextId : nextId + 1L;
+    }
 }

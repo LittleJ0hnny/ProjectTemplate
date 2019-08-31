@@ -2,21 +2,22 @@ package com.littlejohnny.product.util.coverters;
 
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.core.type.TypeReference;
+import com.littlejohnny.product.domain.model.dto.AttributeValueDTO;
 import com.littlejohnny.product.util.MappersFactory;
 
 import javax.persistence.AttributeConverter;
 import javax.persistence.Converter;
 import java.io.IOException;
-import java.util.HashMap;
-import java.util.Map;
+import java.util.List;
 
 @Converter
-public class AttributesConverter implements AttributeConverter<Map<String, String>, String> {
+public class AttributesConverter implements AttributeConverter<List<AttributeValueDTO>, String> {
+
     @Override
-    public String convertToDatabaseColumn(Map<String, String> attributes) {
+    public String convertToDatabaseColumn(List<AttributeValueDTO> attributeValues) {
         String convertedAttributes = null;
         try {
-            convertedAttributes = MappersFactory.getJSONMapper().writeValueAsString(attributes);
+            convertedAttributes = MappersFactory.getJSONMapper().writeValueAsString(attributeValues);
         } catch (JsonProcessingException e) {
             e.printStackTrace();
         }
@@ -24,13 +25,13 @@ public class AttributesConverter implements AttributeConverter<Map<String, Strin
     }
 
     @Override
-    public Map<String, String> convertToEntityAttribute(String dbData) {
-        Map<String, String> attributes = null;
+    public List<AttributeValueDTO> convertToEntityAttribute(String dbData) {
+        List<AttributeValueDTO> attributeValueDTOS = null;
         try {
-            attributes = MappersFactory.getJSONMapper().readValue(dbData, new TypeReference<Map<String, String>>() {});
+            attributeValueDTOS = MappersFactory.getJSONMapper().readValue(dbData, new TypeReference<List<AttributeValueDTO>>() {});
         } catch (IOException e) {
             e.printStackTrace();
         }
-        return attributes;
+        return attributeValueDTOS;
     }
 }

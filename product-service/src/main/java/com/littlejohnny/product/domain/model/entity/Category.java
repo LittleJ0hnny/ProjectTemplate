@@ -4,7 +4,9 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 @Data
 @Entity
@@ -31,4 +33,11 @@ public class Category {
     @OneToMany(fetch=FetchType.LAZY, cascade=CascadeType.ALL)
     @JoinColumn(name="parentId")
     private List<Category> childCategories;
+
+    public void addAttributes(List<Attribute> attributesForAdding) {
+        if(Objects.isNull(attributes)) {
+            attributes = new ArrayList<>();
+        }
+        attributes.addAll(attributesForAdding);
+    }
 }

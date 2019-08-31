@@ -18,11 +18,4 @@ public class CategoryDTO {
     private Long parentId;
 
     private List<CategoryDTO> childCategories;
-
-    public CategoryDTO(Category category) {
-        this.id = category.getId();
-        this.name = category.getName();
-        this.parentId = category.getParentId();
-        this.childCategories = category.getChildCategories().stream().map(CategoryDTO::new).collect(Collectors.toList());
-    }
 }
