@@ -7,12 +7,11 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper
-public interface ProductFeatureMapper {
+@Mapper(componentModel="spring")
+public abstract class ProductFeatureMapper {
 
-    ProductFeatureMapper INSTANCE = Mappers.getMapper(ProductFeatureMapper.class);
+    public abstract ProductFeatureDTO entityToDto(ProductFeature productFeature);
 
-    ProductFeatureDTO entityToDto(ProductFeature productFeature);
+    public abstract ProductFeature dtoToEntity(ProductFeatureDTO productFeatureDTO);
 
-    ProductFeature dtoToEntity(ProductFeatureDTO productFeatureDTO);
 }

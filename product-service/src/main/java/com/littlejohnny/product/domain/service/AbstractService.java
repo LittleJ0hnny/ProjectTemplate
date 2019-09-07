@@ -37,6 +37,11 @@ public abstract class AbstractService<T, ID, R extends JpaRepository<T, ID>> imp
     }
 
     @Override
+    public List<T> findAllById(Iterable<ID> ids) {
+        return repository.findAllById(ids);
+    }
+
+    @Override
     public List<T> findAll() {
         return repository.findAll();
     }
@@ -55,5 +60,10 @@ public abstract class AbstractService<T, ID, R extends JpaRepository<T, ID>> imp
     @Transactional
     public List<T> saveAll(Iterable<T> iterable) {
         return repository.saveAll(iterable);
+    }
+
+    @Override
+    public void flush() {
+        repository.flush();
     }
 }

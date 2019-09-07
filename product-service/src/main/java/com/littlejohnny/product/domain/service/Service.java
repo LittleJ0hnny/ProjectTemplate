@@ -14,6 +14,8 @@ public interface Service<T, ID, R extends JpaRepository<T, ID>> {
 
     List<T> findAll();
 
+    List<T> findAllById(Iterable<ID> ids);
+
     R getRepository();
 
     T getOne(ID id);
@@ -21,4 +23,6 @@ public interface Service<T, ID, R extends JpaRepository<T, ID>> {
     Optional<T> findById(ID id);
 
     List<T> saveAll(Iterable<T> iterable);
+
+    void flush();
 }

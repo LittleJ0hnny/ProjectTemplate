@@ -4,7 +4,10 @@ import com.littlejohnny.product.domain.model.dto.AttributeValueDTO;
 import com.littlejohnny.product.domain.model.dto.ProductDTO;
 import com.littlejohnny.product.domain.model.dto.ProductFeatureDTO;
 import com.littlejohnny.product.domain.model.entity.Product;
+import com.littlejohnny.product.domain.model.entity.ProductFeature;
+import com.littlejohnny.product.domain.model.mappers.ProductFeatureMapper;
 import com.littlejohnny.product.domain.model.mappers.ProductMapper;
+import com.littlejohnny.product.domain.service.ProductFeatureService;
 import com.littlejohnny.product.domain.service.ProductService;
 import com.littlejohnny.utills.DateTimeUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +16,8 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/products")
@@ -24,13 +29,11 @@ public class ProductController {
     @PostMapping
     public ResponseEntity createProduct() {
         AttributeValueDTO attributeValueDTO = new AttributeValueDTO();
-        attributeValueDTO.setId(0L);
-        attributeValueDTO.setName("Name");
-        attributeValueDTO.setValueId(0L);
+        attributeValueDTO.setAttributeId(0L);
+        attributeValueDTO.setAttributeValueId(0L);
         AttributeValueDTO attributeValueDTO1 = new AttributeValueDTO();
-        attributeValueDTO.setId(1L);
-        attributeValueDTO.setName("Name2");
-        attributeValueDTO.setValueId(1L);
+        attributeValueDTO1.setAttributeId(1L);
+        attributeValueDTO1.setAttributeValueId(1L);
         ProductFeatureDTO productFeatureDTO = new ProductFeatureDTO();
         productFeatureDTO.setName("ProductFeature1");
         productFeatureDTO.setDescription("Description");
@@ -52,7 +55,8 @@ public class ProductController {
         productDTO.setStockpile(50);
         productDTO.setCreationTime(DateTimeUtil.currentTime());
 
-        productService.save(ProductMapper.INSTANCE.dtoToEntity(productDTO));
+        productService.createProduct(productDTO);
         return ResponseEntity.created(URI.create("url")).build();
     }
+
 }

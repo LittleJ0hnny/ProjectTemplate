@@ -1,7 +1,7 @@
 spring:
   cloud:
     config:
-      name: auth
+      name: auth-service
       discovery:
         service-id: configservice
         enabled: true

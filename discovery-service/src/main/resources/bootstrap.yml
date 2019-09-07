@@ -1,6 +1,6 @@
 spring:
   cloud:
     config:
-      name: discovery
+      name: discovery-service
       username: configUser
       password: configPassword

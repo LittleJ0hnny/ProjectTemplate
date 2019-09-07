@@ -2,17 +2,27 @@ package com.littlejohnny.product.domain.model.mappers;
 
 import com.littlejohnny.product.domain.model.dto.AttributeDTO;
 import com.littlejohnny.product.domain.model.entity.Attribute;
-import org.mapstruct.Mapper;
-import org.mapstruct.Mapping;
-import org.mapstruct.Mappings;
+import com.littlejohnny.product.domain.service.CategoryService;
+import org.mapstruct.*;
 import org.mapstruct.factory.Mappers;
+import org.springframework.beans.factory.annotation.Autowired;
 
-@Mapper
-public interface AttributeMapper {
+@Mapper(componentModel="spring")
+public abstract class AttributeMapper {
 
-    AttributeMapper INSTANCE = Mappers.getMapper(AttributeMapper.class);
+    private static CategoryService categoryService;
 
-    AttributeDTO entityToDto(Attribute attribute);
+    public abstract AttributeDTO entityToDto(Attribute attribute);
 
-    Attribute dtoToEntity(AttributeDTO attributeDTO);
+    public abstract Attribute dtoToEntity(AttributeDTO attributeDTO);
+
+    @AfterMapping
+    public void dtoToEntity(AttributeDTO attributeDTO, @MappingTarget Attribute attribute) {
+        attribute.setCategory(categoryService.getOne(attributeDTO.getCategoryId()));
+    }
+
+    @Autowired
+    public void setCategoryService(CategoryService categoryService) {
+        AttributeMapper.categoryService = categoryService;
+    }
 }

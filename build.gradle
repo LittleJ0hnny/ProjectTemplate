@@ -16,10 +16,6 @@ buildscript {
     }
 }
 
-plugins {
-    id 'net.ltgt.apt' version '0.20'
-}
-
 group 'com.littlejohnny'
 version '1.0-SNAPSHOT'
 
@@ -53,12 +49,12 @@ configure(allprojects - project(':utils')) {
         implementation("org.glassfish.jaxb:jaxb-runtime:${jaxb_version}")
         testImplementation("org.springframework.boot:spring-boot-starter-test")
         compileOnly("org.projectlombok:lombok:${lombok_version}")
+        annotationProcessor("org.projectlombok:lombok:${lombok_version}")
     }
 }
 
 configure([project(":operation-service"), project(":order-service"), project(":product-service")]) {
-    apply plugin: 'net.ltgt.apt-idea'
-    
+
     configurations {
         liquibase
     }
@@ -72,7 +68,7 @@ configure([project(":operation-service"), project(":order-service"), project(":p
         implementation("org.springframework.cloud:spring-cloud-starter-config")
         implementation("org.springframework.boot:spring-boot-starter-web")
         implementation("org.mapstruct:mapstruct:${mapstruct_version}")
-        implementation("org.mapstruct:mapstruct-processor:${mapstruct_version}")
+        annotationProcessor("org.mapstruct:mapstruct-processor:${mapstruct_version}")
         implementation("mysql:mysql-connector-java:${mysql_connector_version}")
         implementation("org.liquibase:liquibase-core:${liquibase_version}")
         implementation("org.javassist:javassist:${javassist_version}")
@@ -83,8 +79,3 @@ configure([project(":operation-service"), project(":order-service"), project(":p
         liquibase ("mysql:mysql-connector-java:${mysql_connector_version}")
     }
 }
-
-task wrapper(type: Wrapper) {
-    gradleVersion = '4.10.2'
-}
-

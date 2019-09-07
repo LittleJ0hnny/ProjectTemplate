@@ -18,25 +18,23 @@ import java.util.stream.Collectors;
 @RequestMapping("/categories")
 public class CategoryController {
 
-    private static final Long ROOT_CATEGORY_ID = 1L;
-
     @Autowired
     private CategoryService categoryService;
 
     @PostMapping
     public ResponseEntity createCategory(@RequestBody CategoryDTO categoryDTO) {
-        categoryService.save(CategoryMapper.INSTANCE.dtoToEntity(categoryDTO));
+        categoryService.createCategory(categoryDTO);
         return ResponseEntity.created(URI.create("url")).build();
     }
 
     @GetMapping("/{id}")
     public CategoryDTO getCategoryById(@PathVariable Long id) {
-        return CategoryMapper.INSTANCE.entityToDto(categoryService.getOne(id));
+        return categoryService.getCategoryById(id);
     }
 
-    @GetMapping
+    @GetMapping("/root")
     public CategoryDTO getFullCategoryTree() {
-        return CategoryMapper.INSTANCE.entityToDto(categoryService.getOne(ROOT_CATEGORY_ID));
+        return categoryService.getRootCategory();
     }
 
     @DeleteMapping("/{id}")
@@ -47,14 +45,13 @@ public class CategoryController {
 
     @PostMapping("/{id}/attributes")
     public ResponseEntity addCategoryAttributes(@PathVariable Long id, @RequestBody List<AttributeDTO> attributeDTOs) {
-        Category category = categoryService.getOne(id);
-        category.addAttributes(attributeDTOs.stream().map(AttributeMapper.INSTANCE::dtoToEntity).collect(Collectors.toList()));
+        categoryService.addAttributes(id, attributeDTOs);
         return ResponseEntity.created(URI.create("url")).build();
     }
 
     @DeleteMapping("/{categoryId}/attributes/{attributeId}")
     public ResponseEntity deleteCategoryAttributes(@PathVariable Long categoryId, @PathVariable Long attributeId) {
-        categoryService.getOne(categoryId).getAttributes().removeIf(e -> e.getId().equals(attributeId));
+        categoryService.deleteAttribute(categoryId, attributeId);
         return ResponseEntity.noContent().build();
     }
 }

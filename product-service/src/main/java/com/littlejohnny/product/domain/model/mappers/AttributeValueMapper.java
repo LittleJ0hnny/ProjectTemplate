@@ -1,5 +1,8 @@
 package com.littlejohnny.product.domain.model.mappers;
 
-public interface AttributeValueMapper {
+import org.mapstruct.Mapper;
+
+@Mapper(componentModel="spring")
+public abstract class AttributeValueMapper {
 
 }

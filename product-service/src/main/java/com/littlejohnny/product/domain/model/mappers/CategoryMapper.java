@@ -7,12 +7,10 @@ import org.mapstruct.Mapping;
 import org.mapstruct.Mappings;
 import org.mapstruct.factory.Mappers;
 
-@Mapper(componentModel="spring", uses = CustomAttributeMapper.class)
-public interface CategoryMapper {
+@Mapper(componentModel="spring")
+public abstract class CategoryMapper {
 
-    CategoryMapper INSTANCE = Mappers.getMapper(CategoryMapper.class);
+    public abstract CategoryDTO entityToDto(Category category);
 
-    CategoryDTO entityToDto(Category category);
-
-    Category dtoToEntity(CategoryDTO categoryDTO);
+    public abstract Category dtoToEntity(CategoryDTO categoryDTO);
 }

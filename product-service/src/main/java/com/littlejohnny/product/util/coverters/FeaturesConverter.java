@@ -15,7 +15,6 @@ import java.util.stream.Collectors;
 @Converter
 public class FeaturesConverter implements AttributeConverter<List<ProductFeature>, String> {
 
-
     private static ProductFeatureService productFeatureService;
 
     @Override
@@ -30,7 +29,7 @@ public class FeaturesConverter implements AttributeConverter<List<ProductFeature
 
     @Override
     public List<ProductFeature> convertToEntityAttribute(String dbData) {
-        return productFeatureService.findAllByIdIn(getIdsFromString(dbData));
+        return productFeatureService.findAllById(getIdsFromString(dbData));
     }
 
     private List<Long> getIdsFromString(String dbData) {
