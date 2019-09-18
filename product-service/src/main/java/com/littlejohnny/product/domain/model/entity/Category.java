@@ -1,16 +1,18 @@
 package com.littlejohnny.product.domain.model.entity;
 
-import lombok.Data;
-import lombok.NoArgsConstructor;
+import lombok.*;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
-@Data
+
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "categories")
 public class Category {
 
@@ -34,10 +36,27 @@ public class Category {
     @JoinColumn(name="parentId")
     private List<Category> childCategories;
 
-    public void addAttributes(List<Attribute> attributesForAdding) {
-        if(Objects.isNull(attributes)) {
-            attributes = new ArrayList<>();
-        }
-        attributes.addAll(attributesForAdding);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Category)) return false;
+        Category category = (Category) o;
+        return id.equals(category.id) &&
+                name.equals(category.name) &&
+                parentId.equals(category.parentId);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, parentId);
+    }
+
+    @Override
+    public String toString() {
+        return "Category{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", parentId=" + parentId +
+                '}';
     }
 }

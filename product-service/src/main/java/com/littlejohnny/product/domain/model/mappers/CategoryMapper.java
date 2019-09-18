@@ -12,5 +12,8 @@ public abstract class CategoryMapper {
 
     public abstract CategoryDTO entityToDto(Category category);
 
+    @Mappings(value = {
+            @Mapping(target = "id", ignore = true)
+    })
     public abstract Category dtoToEntity(CategoryDTO categoryDTO);
 }

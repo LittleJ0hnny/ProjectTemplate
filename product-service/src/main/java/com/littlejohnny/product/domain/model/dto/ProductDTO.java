@@ -1,10 +1,12 @@
 package com.littlejohnny.product.domain.model.dto;
 
+import com.littlejohnny.product.domain.model.entity.AttributeValue;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 @Data
 @NoArgsConstructor
@@ -22,7 +24,9 @@ public class ProductDTO {
 
     private List<String> imageUrls;
 
-    private List<AttributeValueDTO> attributeValues;
+    private List<AttributeValueDTO> attributeValueDTOs;
+
+    private Map<String, String> customAttributeValues;
 
     private List<ProductFeatureDTO> productFeatures;
 

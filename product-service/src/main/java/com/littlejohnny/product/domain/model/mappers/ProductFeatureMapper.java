@@ -12,6 +12,9 @@ public abstract class ProductFeatureMapper {
 
     public abstract ProductFeatureDTO entityToDto(ProductFeature productFeature);
 
+    @Mappings(value = {
+            @Mapping(target = "id", ignore = true)
+    })
     public abstract ProductFeature dtoToEntity(ProductFeatureDTO productFeatureDTO);
 
 }

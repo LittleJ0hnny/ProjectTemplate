@@ -6,10 +6,13 @@ import com.littlejohnny.product.domain.model.entity.Category;
 import com.littlejohnny.product.domain.repository.CategoryRepository;
 
 import java.util.List;
+import java.util.Map;
 
 public interface CategoryService extends Service<Category, Long, CategoryRepository> {
 
     void createCategory(CategoryDTO categoryDTO);
+
+    void updateCategory(CategoryDTO categoryDTO);
 
     CategoryDTO getRootCategory();
 
@@ -17,7 +20,5 @@ public interface CategoryService extends Service<Category, Long, CategoryReposit
 
     void deleteCategoryById(Long id);
 
-    void addAttributes(Long id, List<AttributeDTO> attributeDTOs);
-
-    void deleteAttribute(Long categoryId, Long attributeId);
+    List<AttributeDTO> getCategoryAttributes(Long id);
 }

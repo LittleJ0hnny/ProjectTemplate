@@ -13,6 +13,7 @@ import com.littlejohnny.product.domain.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -29,4 +30,15 @@ public class ProductServiceImpl extends AbstractService<Product, Long, ProductRe
     public void createProduct(ProductDTO productDTO) {
         save(productMapper.dtoToEntity(productDTO));
     }
+
+    public ProductDTO getProductById(Long productId) {
+        Product product = findById(productId).orElseThrow(() -> new EntityNotFoundException("Product with id " + productId + " not exists."));
+        return productMapper.entityToDto(product);
+    }
+
+    @Override
+    public List<ProductDTO> getAllProducts() {
+        return findAll().stream().map(e -> productMapper.entityToDto(e)).collect(Collectors.toList());
+    }
+
 }

@@ -7,7 +7,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class AttributeValueDTO {
 
-    private Long attributeId;
+    private String attributeName;
 
-    private Long attributeValueId;
+    private String attributeValue;
 }

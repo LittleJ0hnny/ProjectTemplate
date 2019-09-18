@@ -1,9 +1,6 @@
 package com.littlejohnny.product.domain.controller;
 
 import com.littlejohnny.product.domain.model.dto.AttributeDTO;
-import com.littlejohnny.product.domain.model.entity.Category;
-import com.littlejohnny.product.domain.model.mappers.AttributeMapper;
-import com.littlejohnny.product.domain.model.mappers.CategoryMapper;
 import com.littlejohnny.product.domain.model.dto.CategoryDTO;
 import com.littlejohnny.product.domain.service.CategoryService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.net.URI;
 import java.util.List;
-import java.util.stream.Collectors;
+import java.util.Map;
 
 @RestController
 @RequestMapping("/categories")
@@ -27,31 +24,30 @@ public class CategoryController {
         return ResponseEntity.created(URI.create("url")).build();
     }
 
-    @GetMapping("/{id}")
-    public CategoryDTO getCategoryById(@PathVariable Long id) {
-        return categoryService.getCategoryById(id);
+    @PutMapping
+    public ResponseEntity updateCategory(@RequestBody CategoryDTO categoryDTO) {
+        categoryService.updateCategory(categoryDTO);
+        return ResponseEntity.noContent().build();
     }
 
-    @GetMapping("/root")
+    @GetMapping("/{categoryId}")
+    public CategoryDTO getCategoryById(@PathVariable Long categoryId) {
+        return categoryService.getCategoryById(categoryId);
+    }
+
+    @GetMapping
     public CategoryDTO getFullCategoryTree() {
         return categoryService.getRootCategory();
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity deleteCategory(@PathVariable Long id) {
-        categoryService.deleteById(id);
+    @DeleteMapping("/{categoryId}")
+    public ResponseEntity deleteCategory(@PathVariable Long categoryId) {
+        categoryService.deleteById(categoryId);
         return ResponseEntity.noContent().build();
     }
 
-    @PostMapping("/{id}/attributes")
-    public ResponseEntity addCategoryAttributes(@PathVariable Long id, @RequestBody List<AttributeDTO> attributeDTOs) {
-        categoryService.addAttributes(id, attributeDTOs);
-        return ResponseEntity.created(URI.create("url")).build();
-    }
-
-    @DeleteMapping("/{categoryId}/attributes/{attributeId}")
-    public ResponseEntity deleteCategoryAttributes(@PathVariable Long categoryId, @PathVariable Long attributeId) {
-        categoryService.deleteAttribute(categoryId, attributeId);
-        return ResponseEntity.noContent().build();
+    @GetMapping("/{categoryId}/attributes")
+    public List<AttributeDTO> getCategoryAttributes(@PathVariable Long categoryId) {
+        return categoryService.getCategoryAttributes(categoryId);
     }
 }

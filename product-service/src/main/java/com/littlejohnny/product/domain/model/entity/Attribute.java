@@ -1,18 +1,20 @@
 package com.littlejohnny.product.domain.model.entity;
 
-import com.littlejohnny.product.util.coverters.AttributesConverter;
 import com.littlejohnny.product.util.coverters.ListOfExistValuesConverter;
-import com.littlejohnny.product.util.coverters.ListOfStringsConverter;
-import lombok.Data;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
-import java.util.*;
-import java.util.stream.Collectors;
+import java.util.Map;
+import java.util.Objects;
 
-@Data
+@Getter
+@Setter
 @Entity
 @NoArgsConstructor
+@AllArgsConstructor
 @Table(name = "attributes")
 public class Attribute {
 
@@ -30,22 +32,32 @@ public class Attribute {
     @Convert(converter = ListOfExistValuesConverter.class)
     private Map<Long, String> existingValues;
 
-    public void addExistingValue(String value) {
-        if(Objects.isNull(existingValues)) {
-            existingValues = new HashMap<>();
-        }
-
-        long nextId = nextId(existingValues);
-
-        existingValues.put(nextId, value);
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Attribute)) return false;
+        Attribute attribute = (Attribute) o;
+        return Objects.equals(id, attribute.id) &&
+                name.equals(attribute.name) &&
+                category.getId().equals(attribute.category.getId()) &&
+                category.getName().equals(attribute.category.getName()) &&
+                Objects.equals(existingValues, attribute.existingValues);
     }
 
-    private Long nextId(Map<Long, String> existingValues) {
-        long nextId = existingValues.keySet()
-                .stream()
-                .sorted()
-                .max(Long::compare).orElse(0L);
+    @Override
+    public int hashCode() {
+        return Objects.hash(id, name, category, existingValues);
+    }
 
-        return nextId == 0L ? nextId : nextId + 1L;
+    @Override
+    public String toString() {
+        String existingValues = this.existingValues == null ? "\"\"" : this.existingValues.toString();
+
+        return "Attribute{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", category=" + category.getName() +
+                ", existingValues=" + existingValues +
+                '}';
     }
 }

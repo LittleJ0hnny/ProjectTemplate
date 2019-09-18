@@ -1,15 +1,16 @@
 //TODO
-1.Resolve problem with empty value of fileName validation in ImageController.
-2.Operate files without extension in name. And develop mechanism fo touching and detaching extension to fileName.
-3.Move same logic related with fileName validation in separated method.
-4.Add collection of image paths to product entity.
+1. Add mechanism to sort attribute values list.
+2. Check that id exists on update.
+3. Add Controller Advise.
+4. Add Filtering (will search chars in record cell)
 5.Add logger.
 6.Think about ports (replication)
-7.Expose only gateway
+7. Write tests
 8.fix gateway start problem (add timeout or ping gateway endpoint)
 9.Configure line endings on git
 10.Bind services to exact ip. Configure network
 11.Read about swarm
+12. Повертати адекватний шлях до створеного ресурсу в респонсію
 
 for dev dependencies npm install --save-dev @angular-devkit/build-angular
 
